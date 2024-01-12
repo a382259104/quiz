@@ -1,0 +1,99 @@
+<html>
+    <body>
+        <table>
+            <tr>
+                <td valign="top">
+                    <ul>
+                        <li><a href="/Kanbas/Account/Navigation/index.html">Account</a></li>
+                        <li><a href="/Kanbas/Dashboard/screen.html">Dashboard</a></li>
+                        <li><a href="/Kanbas/Courses/Home/screen.html">Courses</a></li>
+                        <li><a href="/Kanbas/Calendar/index.html">Calendar</a></li>
+                        <li><a href="/Kanbas/Inbox/index.html">Inbox</a></li>
+                    </ul>
+                    
+                </td>
+                <td valign="top">
+                    <ul>
+                        <li>
+                          <a href="/Kanbas/Courses/Home/screen.html">
+                            Home</a></li>
+                        <li><a href="/Kanbas/Courses/Modules/screen.html">
+                            Modules</a></li>
+                        <li><a href="/Kanbas/Courses/Piazza/index.html">
+                            Piazza</a></li>
+                        <li><a href="/Kanbas/Courses/Grades/screen.html">
+                            Grades</a></li>
+                        <li><a href="/Kanbas/Courses/Assignments/screen.html">
+                            Assignments</a></li>
+                      </ul>
+                    
+                </td>
+                <td>
+                    <select>
+                        <option>Speed Grader</option>
+                    </select>
+                    <hr>
+                    <h2> Assignment Name</h2>
+                    <p>
+                        <input type="text" placeholder="A1"> 
+                    </p>
+                    <p>
+                        <textarea placeholder="Uhhh some description i guess"></textarea> 
+                    </p>
+                    <p>
+                        <label>Points</label> <br/>
+                        <input type="text" placeholder="100">
+                    </p>
+                    <p>
+                        <label>Assignment Group</label> <br/>
+                        <select>
+                            <option>ASSIGNMENTS</option>
+                        </select>
+                    </p>
+                    <p>
+                        <lable>Display Grade as</lable> <br/>
+                        <select>
+                            <option>Percentage</option>
+                        </select>
+                    </p>
+                    <p>
+                        <lable><b>Submission Type</b></lable> <br/>
+                        <select>
+                            <option>Online</option>
+                        </select>
+                    </p>
+                    <p>
+                        <lable>Online Entry Options</lable> <br/>
+                        <input type="checkbox"> <label>Text Entry</label> <br/>
+                        <input type="checkbox"> <label>Website URL</label> <br/>
+                        <input type="checkbox"> <label>Media Recordings</label> <br/>
+                        <input type="checkbox"> <label>Student Annotation</label> <br/>
+                        <input type="checkbox"> <label>File Uploads</label> <br/>
+                    </p>
+                    <p>
+                        <label><b>Assign</b></label> <br/>
+                        <lable>Assign to</lable> <br/>
+                        <select>
+                            <option>Everyone</option>
+                        </select>
+                    </p>
+                    <p>
+                        <lable>Due</lable> <br/>
+                        <input type="date" value="2024-01-01">
+                    </p>
+                    <p>
+                        <lable>Until</lable> <br/>
+                        <input type="date" value="2024-01-01">
+                    </p>
+                    <p>
+                        <!-- this happens that both are using the same link, if not, i need another form-->
+                        <form action="/Kanbas/Courses/Assignments/screen.html">
+                            <button type="submit">Cancel</button>
+                            <button type="submit">Save</button>
+                        </form>
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>
