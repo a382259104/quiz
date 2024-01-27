@@ -1,31 +1,55 @@
 <html>
-    <body>
-        <table>
-            <tbody>
+
+<head>
+    <link rel="stylesheet" href="/Kanbas/styles.css" />
+    <link rel="stylesheet" href="/Kanbas/Navigation/index.css" />
+    <link rel="stylesheet" href="/libs/font-awesome-4.7.0/css/font-awesome.min.css" />
+</head>
+
+<body>
+    <table>
+        <tbody>
             <tr>
                 <td valign="top">
-                    <ul style="background-color: rgb(112, 151, 112); list-style-type:square;">
-                        <li><a href="/Kanbas/Account/Navigation/index.html">Account</a></li>
-                        <li><a href="/Kanbas/Dashboard/screen.html">Dashboard</a></li>
-                        <li><a href="/Kanbas/Courses/Home/screen.html">Courses</a></li>
-                        <li><a href="/Kanbas/Calendar/index.html">Calendar</a></li>
-                        <li><a href="/Kanbas/Inbox/index.html">Inbox</a></li>
+                    <ul class="wd-kanbas-navigation">
+                        <li><a href="/Kanbas/Courses/Home/screen.html">
+                                <img src="/images/logo.jpg" class="logo">
+                            </a></li>
+                        <li><a href="/Kanbas/Account/Profile/screen.html">
+                                <i class="fa fa-shower fa-lg" aria-hidden="true" style="color: whitesmoke;"></i>
+                                Account
+                            </a>
+                        </li>
+                        <li class="wd-active">
+                            <a href="/Kanbas/Dashboard/screen.html">
+                                <i class="fa fa-tachometer"></i> Dashboard</a>
+                        </li>
+                        <li><a href="/Kanbas/Courses/Home/screen.html">
+                                <i class="fa fa-book" aria-hidden="true"></i>
+                                Courses</a> </li>
+                        <li><a href="#"><i class="fa fa-calendar"></i> Calendar</a></li>
+                        <li><a href="#"><i class="fa fa-archive" aria-hidden="true"></i> Inbox</a></li>
+                        <li><a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> History</a></li>
+                        <li><a href="#"><i class="fa fa-television" aria-hidden="true"></i> Studio</a></li>
+                        <li><a href="#"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Commons</a></li>
+                        <li><a href="#"><i class="fa fa-question-circle-o" aria-hidden="true"></i>Help</a></li>
                     </ul>
-                    
+
                 </td>
                 <td valign="top">
                     <ul>
-                    <li style="border-left: 3px solid gold; list-style: none; padding: 3px;">
-                    <a href="/Kanbas/Courses/Home/screen.html">
-                        Home</a></li>
-                    <li><a href="/Kanbas/Courses/Modules/screen.html">
-                        Modules</a></li>
-                    <li><a href="/Kanbas/Courses/Piazza/index.html">
-                        Piazza</a></li>
-                    <li><a href="/Kanbas/Courses/Grades/screen.html">
-                        Grades</a></li>
-                    <li><a href="/Kanbas/Courses/Assignments/screen.html">
-                        Assignments</a></li>
+                        <li style="border-left: 3px solid gold; list-style: none; padding: 3px;">
+                            <a href="/Kanbas/Courses/Home/screen.html">
+                                Home</a>
+                        </li>
+                        <li><a href="/Kanbas/Courses/Modules/screen.html">
+                                Modules</a></li>
+                        <li><a href="/Kanbas/Courses/Piazza/index.html">
+                                Piazza</a></li>
+                        <li><a href="/Kanbas/Courses/Grades/screen.html">
+                                Grades</a></li>
+                        <li><a href="/Kanbas/Courses/Assignments/screen.html">
+                                Assignments</a></li>
                     </ul>
                 </td>
                 <td>
@@ -37,44 +61,44 @@
                     <button>Module</button>
                     <ul>
                         <li> Week 0 - INTRO
-                        <ul>
-                            <li>Learning Objectives
                             <ul>
-                                <li>Introduction to the course</li>
-                                <li>Learn what is Web Development</li>
-                                <li>Creating a development environment</li>
-                                <li>Creating a web application</li>
-                                <li>Getting started with the 1st assignment</li>
+                                <li>Learning Objectives
+                                    <ul>
+                                        <li>Introduction to the course</li>
+                                        <li>Learn what is Web Development</li>
+                                        <li>Creating a development environment</li>
+                                        <li>Creating a web application</li>
+                                        <li>Getting started with the 1st assignment</li>
+                                    </ul>
+                                </li>
+                                <li> Readings
+                                    <ul>
+                                        <li> Full Stack Developer Chapter 1</li>
+                                        <li> Full Stack Developer Chapter 2</li>
+                                    </ul>
+                                </li>
+                                <li> Slides
+                                    <ul>
+                                        <li> Introduction</li>
+                                    </ul>
+                                </li>
                             </ul>
-                            </li>
-                            <li> Readings
-                                <ul>
-                                    <li> Full Stack Developer Chapter 1</li>
-                                    <li> Full Stack Developer Chapter 2</li>
-                                </ul>
-                            </li>
-                            <li> Slides
-                                <ul>
-                                    <li> Introduction</li>
-                                </ul>
-                            </li>
-                        </ul>
                         </li>
                         <li> Week 1 - HTML
-                        <ul>
-                            <li>Learning Objectives
-                                <ul>
-                                    <li>Introduction to HTML</li>
-                                    <li>And other things</li>
-                                </ul>
-                            </li>
-                            <li>Readings
-                                <ul>
-                                    <li>Chapter 1</li>
-                                    <li>Chapter 2</li>
-                                </ul>
-                            </li>
-                        </ul>
+                            <ul>
+                                <li>Learning Objectives
+                                    <ul>
+                                        <li>Introduction to HTML</li>
+                                        <li>And other things</li>
+                                    </ul>
+                                </li>
+                                <li>Readings
+                                    <ul>
+                                        <li>Chapter 1</li>
+                                        <li>Chapter 2</li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </td>
@@ -85,7 +109,8 @@
 
                     <ul>
                         <li style="margin-top: 10px;">
-                            <a href="http://www.google.com">Import existing content</a></li>
+                            <a href="http://www.google.com">Import existing content</a>
+                        </li>
                         <li><a href="http://www.google.com">Import from Commons</a></li>
                         <li><a href="http://www.google.com">Choose home page</a></li>
                     </ul>
@@ -99,12 +124,12 @@
                         <li><a href="http://www.google.com">Lecture 1/12 Morning</a></li>
                         <li><a href="http://www.google.com">Lecture 1/12 Afternoon</a></li>
                     </ul>
-            
+
                 </td>
             </tr>
-            </tbody>
-        </table>
-        
-    </body>
+        </tbody>
+    </table>
+
+</body>
+
 </html>
-       
