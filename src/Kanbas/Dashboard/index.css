@@ -1,0 +1,34 @@
+.row {
+    margin-top: 0;
+}
+
+.card-text{
+    margin-bottom:5px;
+    font-size:110%;
+    color:gray;
+}
+
+.card-text p{
+    margin:0;
+}
+
+.card-text .description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: small;
+}
+
+.icons{
+    color:gray;
+}
+
+.flex-row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.half-row{
+    float: left;
+    width: 33%;
+}
