@@ -1,0 +1,51 @@
+.list-group-item .oval{
+    border:1px solid gray;
+    border-radius: 20px;
+    color:gray;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 7px;
+}
+
+.list-group-item .float-end {
+    margin-right: 15px;
+}
+
+.list-group-item .completed {
+    color:rgb(25, 134, 85);
+}
+
+
+.list-group-item .assignment-description {
+    /* omg this line took me an hour to figure out... */
+    display: inline-block; 
+    margin: 0px;
+}
+
+
+.list-group-item a{
+    color: black;
+    text-decoration: none;
+}
+
+.top-buttons button {
+    border-radius: 5px;
+}
+
+.top-buttons .assignment {
+    background-color: red;
+    color: white;
+}
+
+.top-buttons .search {
+   margin-right: auto;
+}
+
+.no-margin {
+    margin: 0px;
+}
+
+
+.align-center {
+    align-self: center;
+}
