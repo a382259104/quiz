@@ -57,7 +57,7 @@ function Assignments() {
                                     <Link to={`/Kanbas/Courses/${courseId}/Assignments/${assignment._id}`} className="no-margin">
                                         {assignment.title}
                                     </Link>
-                                    hi
+                                    ...
                                 </div>
 
 
