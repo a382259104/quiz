@@ -4,13 +4,17 @@ import Assignment3 from "./a3";
 import Assignment4 from "./a4";
 import Assignment5 from "./a5";
 import Kanbas from "../Kanbas";
+import Poop from "./scratch";
 
 function Labs() {
   return (
     <div>
       <h1>Labs</h1>
-      <Link to="a3">Assignment 3</Link> | <Link to="a4">Assignment 4</Link> |{" "}
-      <Link to="a5">Assignment 5</Link> |{" "} <Link to="/Kanbas">Kanbas</Link>
+      <Link to="a3">Assignment 3</Link> | 
+      <Link to="a4">Assignment 4</Link> |{" "}
+      <Link to="a5">Assignment 5</Link> |{" "} 
+      <Link to="/Kanbas">Kanbas</Link> | {" "}
+      <Link to="scratch">play ground</Link>
       <Routes>
         {/* <Route path="/" element={<h2>Choose an assignment</h2>} /> */}
         <Route path="/" element={<Navigate to="a3" />} />
@@ -18,6 +22,7 @@ function Labs() {
         <Route path="/a4" element={<Assignment4 />} />
         <Route path="/a5" element={<Assignment5 />} />
         <Route path="/Kanbas" element={<Kanbas/>}/>
+        <Route path="/scratch" element={<Poop/>}/>
       </Routes>
     </div>
   );

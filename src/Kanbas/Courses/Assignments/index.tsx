@@ -24,8 +24,6 @@ function Assignments() {
                 <button className="assignment"> <GoPlus /> Assignment</button>
                 <button> <GoPlus /> Group</button>
                 <input className="search" placeholder="Search for Assignment" />
-
-
             </div>
             <ul className="list-group wd-modules">
                 <li className="list-group-item">
@@ -43,8 +41,6 @@ function Assignments() {
                             <FaEllipsisV className="ms-2" />
                         </span>
                     </div>
-
-
                     {/* These are the items */}
                     <ul className="list-group ">
 
@@ -57,12 +53,9 @@ function Assignments() {
                                     <Link to={`/Kanbas/Courses/${courseId}/Assignments/${assignment._id}`} className="no-margin">
                                         {assignment.title}
                                     </Link>
-                                    ...
+                                    <br/>
+                                    hiii
                                 </div>
-
-
-
-
                                 <span className="float-end">
                                     <FaCheckCircle className="text-success" /><FaEllipsisV className="ms-2" /></span>
                             </li>))}
