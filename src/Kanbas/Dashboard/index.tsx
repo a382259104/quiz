@@ -23,10 +23,12 @@ function Dashboard() {
 
 
 
-                <div className="card-body">
+                <div className="card-body" style={{ overflow: "ellipsis", whiteSpace: "nowrap" }}>
                   {/* This is the card title/name */}
                   <Link className="card-title" to={`/Kanbas/Courses/${course._id}/Home`}
-                    style={{ textDecoration: "none", color: "navy", fontWeight: "bold" }}>
+                    style={{
+                      textDecoration: "none", color: "navy", fontWeight: "bold"
+                    }}>
                     {course.number} {course.name} </Link>
 
                   {/* This is the class name thing */}
@@ -42,11 +44,11 @@ function Dashboard() {
                     <div className="half-row"><Link to={`/Kanbas/Courses/${course._id}/Home`} className="icons">
                       <IoMegaphoneOutline className="fs-5" />
                     </Link></div>
-                    
+
                     <div className="half-row"><Link to={`/Kanbas/Courses/${course._id}/Home`} className="icons">
                       <LiaClipboardListSolid className="fs-5" />
                     </Link></div>
-                    
+
                   </div>
 
 

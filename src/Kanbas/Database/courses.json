@@ -46,5 +46,13 @@
         "startDate": "2024-01-10",
         "endDate": "2024-05-15",
         "image": "network.png"
+    },
+    {
+        "_id": "ITV101",
+        "name": "Professional Development",
+        "number": "CLT4999",
+        "startDate": "2024-01-10",
+        "endDate": "2024-05-15",
+        "image": "interview.jpg"
     }
 ]
