@@ -12,6 +12,14 @@
   
 }
 
+.wd-modules .addButton {
+  background-color: darkgreen;
+  color:white;
+  border-radius: 30%;
+  border: 1px;
+  width: 2em;
+}
+
 .wd-modules > li {
   background-color: #f5f5f5;
   border: 1px solid gray !important;
@@ -60,4 +68,18 @@
 
 .line {
   margin: 15px;
+}
+
+.button{
+  border-radius: 50%;
+  background-color: red;
+}
+
+
+.mb-1{
+  margin-bottom: 1px;
+}
+
+.mt-5{
+  margin-top: 5px;
 }
