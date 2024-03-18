@@ -9,7 +9,6 @@ import {
 import { KanbasState } from "../../store";
 
 import "./index.css";
-import { modules } from "../../Database";
 import { FaEllipsisV, FaCheckCircle, FaPlusCircle } from "react-icons/fa";
 import { LuFileText } from "react-icons/lu";
 import { useParams } from "react-router";
@@ -49,24 +48,39 @@ function ModuleList() {
             <div>
                 <ul className="list-group wd-modules">
                     <li className="list-group-item">
-                        <button
-                            onClick={() => dispatch(addModule({ ...module, course: courseId }))}>
-                            Add
-                        </button>
-                        <button
-                            onClick={() => dispatch(updateModule(module))}>
-                            Update
-                        </button>
-                        <input
-                            value={module.name}
-                            onChange={(e) =>
-                                dispatch(setModule({ ...module, name: e.target.value }))
-                            } />
-                        <textarea
-                            value={module.description}
-                            onChange={(e) =>
-                                dispatch(setModule({ ...module, description: e.target.value }))
-                            } />
+
+                        {/* THESE ARE THE BUTTONS  */}
+
+                        <div className="addModules">
+                            <div className="addModules">
+                            <input
+                                value={module.name}
+                                onChange={(e) =>
+                                    dispatch(setModule({ ...module, name: e.target.value }))
+                                } />
+                            <textarea
+                                value={module.description}
+                                onChange={(e) =>
+                                    dispatch(setModule({ ...module, description: e.target.value }))
+                                } />
+
+                            </div>
+                            <div>
+                            <button type="button" className="btn btn-outline-primary goodButton float-end"
+                                onClick={() => dispatch(addModule({ ...module, course: courseId }))}>
+                                Add
+                            </button>
+                            <button type="button" className="btn btn-outline-primary goodButton"
+                                onClick={() => dispatch(updateModule(module))}>
+                                Update
+                            </button>
+
+                            </div>
+
+                            
+                           
+                        </div>
+
                     </li>
 
 
@@ -92,11 +106,11 @@ function ModuleList() {
                                         <FaPlusCircle className="ms-2" />
                                         <FaEllipsisV className="ms-2" />
                                     </span>
-                                    <button
+                                    <button className="goodButton"
                                         onClick={() => dispatch(setModule(module))}>
                                         Edit
                                     </button>
-                                    <button
+                                    <button className="goodButton"
                                         onClick={() => dispatch(deleteModule(module._id))}>
                                         Delete
                                     </button>

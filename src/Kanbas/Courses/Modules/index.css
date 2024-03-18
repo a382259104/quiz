@@ -70,10 +70,6 @@
   margin: 15px;
 }
 
-.button{
-  border-radius: 50%;
-  background-color: red;
-}
 
 
 .mb-1{
@@ -82,4 +78,34 @@
 
 .mt-5{
   margin-top: 5px;
+}
+
+
+.goodButton{
+  margin-right: 5px;
+  border-radius: 20%;
+  border-color: black;
+  margin-left: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: 1px solid gray !important;
+  background-color: #f5f5f5;
+}
+
+.addModules {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+}
+
+.addModules > input{
+  height: 3em;
+  text-align:left;
+  border: 1px solid;
+  border-radius: 5%;
+}
+
+.addModules > textarea{
+  border: 1px solid;
+  border-radius: 5%;
 }

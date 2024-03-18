@@ -4,7 +4,7 @@ import { modules } from "../../Database";
 
 const initialState = {
   modules: modules,
-  module: { name: "New Module 123", description: "New Description" },
+  module: { name: "New Module Name", description: "New Description", },
 };
 
 
@@ -14,7 +14,8 @@ const modulesSlice = createSlice({
   reducers: {
     addModule: (state, action) => {
       state.modules = [
-        { ...action.payload, _id: new Date().getTime().toString() },
+        { ...action.payload,
+          _id: new Date().getTime().toString()},
           ...state.modules,
       ];
     },

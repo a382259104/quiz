@@ -23,8 +23,8 @@ function Labs() {
         <Link to="scratch">play ground</Link>
         <Routes>
           {/* <Route path="/" element={<h2>Choose an assignment</h2>} /> */}
-          <Route path="/" element={<Navigate to="a3" />} />
-          <Route path="/a3/*" element={<Assignment3 />} />
+          <Route path="/" element={<Navigate to="a4" />} />
+          <Route path="/a3" element={<Assignment3 />} />
           <Route path="/a4" element={<Assignment4 />} />
           <Route path="/a5" element={<Assignment5 />} />
           <Route path="/Kanbas" element={<Kanbas />} />
