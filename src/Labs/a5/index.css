@@ -1,0 +1,14 @@
+.a5 a {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.a5 a:hover{
+    background-color: aquamarine;
+}
