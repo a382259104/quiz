@@ -1,7 +1,5 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./index.css"
-import database from "../Database";
 
 import { IoMegaphoneOutline } from "react-icons/io5";
 import { LiaClipboardListSolid } from "react-icons/lia";
