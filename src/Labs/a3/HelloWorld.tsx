@@ -5,7 +5,6 @@ function HelloWorld() {
         <div>
         <Nav/>
         <h1>Hello World!</h1>
-        <h1>i need to render shits</h1>
        </div>
 
     )
