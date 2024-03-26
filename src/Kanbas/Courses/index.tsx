@@ -8,12 +8,28 @@ import Modules from "./Modules";
 import Home from "./Home";
 import Assignments from "./Assignments";
 
-function Courses({courses} : {courses:any[];}) {
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+function Courses() {
+
+    const COURSES_API = "http://localhost:4000/api/courses";
+    const [course, setCourse] = useState<any>({ _id: "" });
+    const findCourseById = async (courseId?: string) => {
+        const response = await axios.get(
+            `${COURSES_API}/${courseId}`
+        );
+        setCourse(response.data);
+    };
+
 
     const { courseId } = useParams();
     const { pathname } = useLocation();
-    const course = courses.find((course) => course._id === courseId);
     const subTab = pathname.split("/").pop();
+
+    useEffect(() => {
+        findCourseById(courseId);
+    }, [courseId]);
 
     return (
         <>
@@ -27,15 +43,15 @@ function Courses({courses} : {courses:any[];}) {
             </div>
             <hr className="line" />
             <div className="main-content">
-                <div className="align-left"><CourseNavigation/></div>
+                <div className="align-left"><CourseNavigation /></div>
                 <div className="align-right">
                     <div>
                         <Routes>
                             <Route path="/" element={<Navigate to="Home" />} />
-                            <Route path="Home" element={<Home/>} />
+                            <Route path="Home" element={<Home />} />
                             <Route path="Modules" element={<Modules />} />
                             <Route path="Piazza" element={<h1>Piazza</h1>} />
-                            <Route path="Assignments" element={<Assignments/>} />
+                            <Route path="Assignments" element={<Assignments />} />
                             <Route path="Assignments/:assignmentId" element={<h1>Assignment Editor</h1>} />
                             <Route path="Grades" element={<h1>Grades</h1>} />
                         </Routes>
