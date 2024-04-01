@@ -124,7 +124,7 @@ function ModuleList() {
                                 className="list-group-item"
                                 onClick={() => setSelectedModule(module)}>
                                 <div>
-                                    {selectedModule._id === module._id ? (
+                                    {selectedModule?._id === module._id ? (
                                         <GoTriangleDown className="me-2" />
                                     ) : (
                                         <GoTriangleRight className="me-2" />
@@ -146,7 +146,7 @@ function ModuleList() {
                                     </button>
 
                                 </div>
-                                {selectedModule._id === module._id && (
+                                {selectedModule?._id === module._id && (
                                     <ul className="list-group">
                                         {module.lessons?.map((lesson: any) => (
                                             <li className="list-group-item">
