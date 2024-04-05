@@ -14,7 +14,7 @@ const API_BASE = process.env.REACT_APP_API_BASE;
 
 function Kanbas() {
     const [courses, setCourses] = useState<any[]>([]);
-    const COURSES_API = `${API_BASE}/api/courses`;
+    const COURSES_API = `${API_BASE}/api/courses`
     const findAllCourses = async () => {
       const response = await axios.get(COURSES_API);
       setCourses(response.data);
