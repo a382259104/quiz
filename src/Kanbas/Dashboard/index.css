@@ -1,0 +1,63 @@
+.row {
+    margin-top: 0;
+}
+
+.card-text {
+    margin-bottom: 5px;
+    font-size: 110%;
+    color: gray;
+}
+
+.card-text p {
+    margin: 0;
+}
+
+.card-text .description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: small;
+}
+
+.icons {
+    color: gray;
+}
+
+.flex-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.dashboard-button {
+    border-radius: 20%;
+}
+
+.width-input {
+    width: fit-content;
+}
+
+.input-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.input-container input {
+    flex: 1;
+    margin-right: 10px;
+    /* Adjust this as needed */
+}
+
+
+.flex-row > *{
+    flex:1
+}
+
+/* .flex-row > button {
+    padding: 0%;
+    width: auto;
+    margin-right: 2px;
+    border: 0px;
+    background-color: white;
+    color:gray;
+} */

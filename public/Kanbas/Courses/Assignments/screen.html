@@ -1,139 +1,182 @@
 <html>
+
+<head>
+
     <head>
-        
+        <link rel="stylesheet" href="/Kanbas/styles.css" />
+        <link rel="stylesheet" href="/Kanbas/Navigation/index.css" />
+        <link rel="stylesheet" href="/Kanbas/Courses/Navigation/index.css" />
+        <link rel="stylesheet" href="/libs/font-awesome-4.7.0/css/font-awesome.min.css" />
     </head>
-    <body>
-        <table>
-            <tr>
 
-                <td valign="top">
-                    <ul>
-                        <li><a href="/Kanbas/Account/Navigation/index.html">Account</a></li>
-                        <li><a href="/Kanbas/Dashboard/screen.html">Dashboard</a></li>
-                        <li><a href="/Kanbas/Courses/Home/screen.html">Courses</a></li>
-                        <li><a href="/Kanbas/Calendar/index.html">Calendar</a></li>
-                        <li><a href="/Kanbas/Inbox/index.html">Inbox</a></li>
-                    </ul>
-                </td>
-                <td valign="top">
-                    <ul>
-                        <li>
-                          <a href="/Kanbas/Courses/Home/screen.html">
-                            Home</a></li>
-                        <li><a href="/Kanbas/Courses/Modules/screen.html">
-                            Modules</a></li>
-                        <li><a href="/Kanbas/Courses/Piazza/index.html">
-                            Piazza</a></li>
-                        <li><a href="/Kanbas/Courses/Grades/screen.html">
-                            Grades</a></li>
-                        <li><a href="/Kanbas/Courses/Assignments/screen.html">
-                            Assignments</a></li>
-                    </ul>
-                </td>
-                
-                <td>
-                    
-                    <input type="search" placeholder="Search for Assignments">
-                    <button> Group </button>
-                    <button> Assignment </button>
-                    <select>
-                        <option>Edit Assignment Dates</option>
-                    </select>
-                        <hr>
+<body>
+    <table>
+        <tr>
 
-                    <!-- NOTE HERE THAT WE NEED TO FORCE THEM IN LINE -->
+            <td valign="top">
+                <ul class="wd-kanbas-navigation">
+                    <li><a href="/Kanbas/Courses/Home/screen.html">
+                            <img src="/images/logo.jpg" class="logo">
+                        </a></li>
+                    <li><a href="/Kanbas/Account/Profile/screen.html">
+                            <i class="fa fa-shower fa-lg" aria-hidden="true" style="color: whitesmoke;"></i>
+                            Account
+                        </a>
+                    </li>
+                    <li class="wd-active">
+                        <a href="/Kanbas/Dashboard/screen.html">
+                            <i class="fa fa-tachometer"></i> Dashboard</a>
+                    </li>
+                    <li><a href="/Kanbas/Courses/Home/screen.html">
+                            <i class="fa fa-book" aria-hidden="true"></i>
+                            Courses</a> </li>
+                    <li><a href="#"><i class="fa fa-calendar"></i> Calendar</a></li>
+                    <li><a href="#"><i class="fa fa-archive" aria-hidden="true"></i> Inbox</a></li>
+                    <li><a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i> History</a></li>
+                    <li><a href="#"><i class="fa fa-television" aria-hidden="true"></i> Studio</a></li>
+                    <li><a href="#"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> Commons</a></li>
+                    <li><a href="#"><i class="fa fa-question-circle-o" aria-hidden="true"></i>Help</a></li>
+                </ul>
+            </td>
+            <td valign="top">
+                <ul class="wd-navigation">
+                    <li>
+                        <p class="wrap-line"> 202430_1 Spring 2024 Semester Full Term</p>
+                    </li>
+                    <li>
+                      <a href="/Kanbas/Courses/Home/screen.html">
+                        Home</a></li>
+                    <li class="wd-active">
+                        <a href="/Kanbas/Courses/Modules/screen.html">
+                        Modules</a></li>
+                    <li><a href="/Kanbas/Courses/Piazza/index.html">
+                        Piazza</a></li>
+                    <li><a href="/Kanbas/Courses/Grades/screen.html">
+                        Grades</a></li>
+                    <li><a href="/Kanbas/Courses/Assignments/screen.html">
+                        Assignments</a></li>
+                  </ul>
+            </td>
 
-                    <h2 style="display: inline-block;"> Assignments - 40% of Total </h2>
-                    <select>
-                        <option>Edit</option>
-                        <option>Speed Grader</option>
-                        <option>Duplicate</option>
-                        <option>Delete</option>
-                        <option>Move to...</option>
-                        <option>Send to...</option>
-                        <option>Copy to...</option>
-                        <option>Share to Commons</option>
-                    </select>
-                    
-                    <ul>
-                        <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">A1</a><br/>
-                            <a href="">Multiple Modules</a> I am working on it right now :></li>
-                        <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">A2</a><br/>
-                            <a href="">Multiple Modules</a>  | Not avaliable yet</li>
-                        <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">A3</a><br/>
-                            <a href="">Multiple Modules</a>  | Not avaliable yet</li>
-                        <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">A4</a><br/>
-                            <a href="">Multiple Modules</a>  | Not avaliable yet</li>
-                        <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">A5</a><br/>
-                            <a href="">Multiple Modules</a>  | Not avaliable yet</li>
-                        <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">A6</a><br/>
-                            <a href="">Multiple Modules</a>  | Not avaliable yet</li>
-                    </ul>
+            <td>
 
-                    <h2 style="display: inline-block;"> Quizzes - 10% of Total </h2>
-                    <select>
-                        <option>Edit</option>
-                        <option>Speed Grader</option>
-                        <option>Duplicate</option>
-                        <option>Delete</option>
-                        <option>Move to...</option>
-                        <option>Send to...</option>
-                        <option>Copy to...</option>
-                        <option>Share to Commons</option>
-                    </select>
-                    
-                    <ul>
-                        <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">Q1</a><br/>
-                            <a href="">Multiple Modules</a>  | Not avaliable yet</li>
-                        <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">Q2</a><br/>
-                            <a href="">Multiple Modules</a>  | Not avaliable yet</li>
-                        <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">Q3</a><br/>
-                            <a href="">Multiple Modules</a>  | Not avaliable yet</li>
-                        <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">Q4</a><br/>
-                            <a href="">Multiple Modules</a>  | Not avaliable yet</li>
-                        <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">Q5</a><br/>
-                            <a href="">Multiple Modules</a>  | Not avaliable yet</li>
-                        <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">Q6</a><br/>
-                            <a href="">Multiple Modules</a>  | Not avaliable yet</li>
-                    </ul>
+                <input type="search" placeholder="Search for Assignments">
+                <button> Group </button>
+                <button> Assignment </button>
+                <select>
+                    <option>Edit Assignment Dates</option>
+                </select>
+                <hr>
 
-                    <h2 style="display: inline-block;"> Exams - 20% of Total </h2>
-                    <select>
-                        <option>Edit</option>
-                        <option>Speed Grader</option>
-                        <option>Duplicate</option>
-                        <option>Delete</option>
-                        <option>Move to...</option>
-                        <option>Send to...</option>
-                        <option>Copy to...</option>
-                        <option>Share to Commons</option>
-                    </select>
-                    
-                    <ul>
-                        <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">Midterm</a><br/>
-                            <a href="">Multiple Modules</a>  | Not avaliable yet</li>
-                        <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">Final</a><br/>
-                            <a href="">Multiple Modules</a>  | Not avaliable yet</li>
-                    </ul>
+                <!-- NOTE HERE THAT WE NEED TO FORCE THEM IN LINE -->
 
-                    <h2 style="display: inline-block;"> Projects - 30% of Total </h2>
-                    <select>
-                        <option>Edit</option>
-                        <option>Speed Grader</option>
-                        <option>Duplicate</option>
-                        <option>Delete</option>
-                        <option>Move to...</option>
-                        <option>Send to...</option>
-                        <option>Copy to...</option>
-                        <option>Share to Commons</option>
-                    </select>
-                    
-                    <ul>
-                        <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">Project</a><br/>
-                            <a href="">Multiple Modules</a>  | Not avaliable yet</li>
-                    </ul>
-                </td>
-            </tr>
-        </table>
-    </body>
+                <h2 style="display: inline-block;"> Assignments - 40% of Total </h2>
+                <select>
+                    <option>Edit</option>
+                    <option>Speed Grader</option>
+                    <option>Duplicate</option>
+                    <option>Delete</option>
+                    <option>Move to...</option>
+                    <option>Send to...</option>
+                    <option>Copy to...</option>
+                    <option>Share to Commons</option>
+                </select>
+
+                <ul>
+                    <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">A1</a><br />
+                        <a href="">Multiple Modules</a> I am working on it right now :>
+                    </li>
+                    <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">A2</a><br />
+                        <a href="">Multiple Modules</a> | Not avaliable yet
+                    </li>
+                    <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">A3</a><br />
+                        <a href="">Multiple Modules</a> | Not avaliable yet
+                    </li>
+                    <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">A4</a><br />
+                        <a href="">Multiple Modules</a> | Not avaliable yet
+                    </li>
+                    <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">A5</a><br />
+                        <a href="">Multiple Modules</a> | Not avaliable yet
+                    </li>
+                    <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">A6</a><br />
+                        <a href="">Multiple Modules</a> | Not avaliable yet
+                    </li>
+                </ul>
+
+                <h2 style="display: inline-block;"> Quizzes - 10% of Total </h2>
+                <select>
+                    <option>Edit</option>
+                    <option>Speed Grader</option>
+                    <option>Duplicate</option>
+                    <option>Delete</option>
+                    <option>Move to...</option>
+                    <option>Send to...</option>
+                    <option>Copy to...</option>
+                    <option>Share to Commons</option>
+                </select>
+
+                <ul>
+                    <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">Q1</a><br />
+                        <a href="">Multiple Modules</a> | Not avaliable yet
+                    </li>
+                    <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">Q2</a><br />
+                        <a href="">Multiple Modules</a> | Not avaliable yet
+                    </li>
+                    <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">Q3</a><br />
+                        <a href="">Multiple Modules</a> | Not avaliable yet
+                    </li>
+                    <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">Q4</a><br />
+                        <a href="">Multiple Modules</a> | Not avaliable yet
+                    </li>
+                    <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">Q5</a><br />
+                        <a href="">Multiple Modules</a> | Not avaliable yet
+                    </li>
+                    <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">Q6</a><br />
+                        <a href="">Multiple Modules</a> | Not avaliable yet
+                    </li>
+                </ul>
+
+                <h2 style="display: inline-block;"> Exams - 20% of Total </h2>
+                <select>
+                    <option>Edit</option>
+                    <option>Speed Grader</option>
+                    <option>Duplicate</option>
+                    <option>Delete</option>
+                    <option>Move to...</option>
+                    <option>Send to...</option>
+                    <option>Copy to...</option>
+                    <option>Share to Commons</option>
+                </select>
+
+                <ul>
+                    <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">Midterm</a><br />
+                        <a href="">Multiple Modules</a> | Not avaliable yet
+                    </li>
+                    <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">Final</a><br />
+                        <a href="">Multiple Modules</a> | Not avaliable yet
+                    </li>
+                </ul>
+
+                <h2 style="display: inline-block;"> Projects - 30% of Total </h2>
+                <select>
+                    <option>Edit</option>
+                    <option>Speed Grader</option>
+                    <option>Duplicate</option>
+                    <option>Delete</option>
+                    <option>Move to...</option>
+                    <option>Send to...</option>
+                    <option>Copy to...</option>
+                    <option>Share to Commons</option>
+                </select>
+
+                <ul>
+                    <li><a href="/Kanbas/Courses/Assignments/Edit/screen.html">Project</a><br />
+                        <a href="">Multiple Modules</a> | Not avaliable yet
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+</body>
+
 </html>

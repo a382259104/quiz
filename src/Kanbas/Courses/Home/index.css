@@ -1,0 +1,27 @@
+.flex-row {
+    display: flex;
+  }
+  
+  .left {
+    flex: 70%;
+  }
+
+  .right {
+    flex: 30%
+  }
+  
+.course-status {
+    list-style-type: none;
+    padding: 0%;
+    background-color: white;
+}
+
+
+.course-status button {
+    width: 100%;
+    text-align: left;
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid rgb(178, 178, 178) !important;
+    background-color: #fafafa;
+}

@@ -1,0 +1,51 @@
+.icon {
+    color:brown;
+}
+
+
+
+.title{
+    display: flex;
+    font-size: x-large;
+    margin: auto;
+    align-items: center;
+    padding: 25px;
+    padding-bottom: -10px;
+}
+
+.title .red-button {
+    color:brown;
+    margin-right: 25px;
+    margin-left: 10px;
+}
+
+.title .text{
+    font-size: large;
+    align-self: center;
+    margin-bottom: 0%;
+}
+.line{
+   margin: auto;
+   margin-left: 25px;
+}
+
+.main-content {
+    display: flex;
+}
+
+.main-content .align-left{
+    flex:1;
+}
+
+.align-right {
+    flex:5; 
+    overflow-y: scroll;
+    bottom: 0;
+    right: 0;
+    height: 100vh; 
+    background-color: #fff; 
+}
+
+.button {
+    color:green
+}
