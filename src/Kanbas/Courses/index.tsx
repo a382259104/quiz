@@ -12,6 +12,7 @@ import axios from "axios";
 import Quizzes from "./Quiz";
 import QuizDetails from "./Quiz/QuizDetails";
 import QuizEdit from "./Quiz/QuizEdit";
+import QuizPreview from "./Quizzes/preview";
 
 const API_BASE = process.env.REACT_APP_API_BASE;
 
@@ -61,13 +62,11 @@ function Courses() {
                             <Route path="Quizzes" element={<Quizzes />} />
                             <Route path="Quizzes/QuizDetails/:quizId" element={<QuizDetails />} />
                             <Route path="Quizzes/EditQuizDetail/:quizId/*" element={<QuizEdit />} />
+                            <Route path="Quizzes" element={<QuizPreview/>} />
                         </Routes>
                     </div>
                 </div>
             </div>
-
-
-
         </>
     );
 }
