@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Quiz, findAllQuizzes, findQuizById, createQuiz, updateQuiz, deleteQuiz } from "./client";
+import TestQuestions from "./testquestions";
 
 function TestQuizzes() {
     const [quizzes, setQuizzes] = useState<Quiz[]>([]);
     const [selectedQuiz, setSelectedQuiz] = useState<Quiz | null>(null);
+    const [showQuestions, setQuestions] = useState(false);
     const [newQuiz, setNewQuiz] = useState<Quiz>({
         _id: "",
         title: "",
@@ -21,7 +23,8 @@ function TestQuizzes() {
         webcamRequired: "No",
         lockQuestionsAfterAnswering: "No",
         questions:[],
-        course:"RS101"
+        course:"RS101",
+        published:false
     });
 
 
@@ -162,6 +165,9 @@ function TestQuizzes() {
                     </select>
                     {/* Add input fields for other quiz properties */}
                     <button onClick={handleUpdateQuiz}>Update Quiz</button>
+
+                    <button onClick={()=>setQuestions(!showQuestions)}>Edit Questions</button>
+                    {showQuestions && <TestQuestions course='RS101'/>}
                 </div>
             )}
 
