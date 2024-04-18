@@ -1,0 +1,42 @@
+input[type="text"] {
+    width: 100%;       /* Full-width */
+    padding: 12px 20px; /* Some padding */
+    margin: 8px 0;     /* Some space around */
+    display: inline-block; /* Display inline-block */
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Box sizing */
+}
+
+.quiz-form {
+    max-width: 850px; /* Adjust width as necessary */
+    margin: auto;
+    font-family: Arial, sans-serif;
+  }
+
+  .quiz-form label {
+    display: block;
+    margin-top: 20px;
+    color: #333;
+    font-size: 14px;
+  }
+
+.quiz-form select,
+.quiz-form input[type="text"],
+.quiz-form input[type="number"],
+.quiz-form input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.quiz-form input[type="text"]:not([readOnly]),
+.quiz-form input[type="number"],
+.quiz-form input[type="date"] {
+  background-color: #ffffff;
+}
