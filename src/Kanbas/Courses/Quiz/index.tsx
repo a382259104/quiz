@@ -1,6 +1,6 @@
 import React from "react";
 import { FaCheckCircle, FaEllipsisV, FaPlusCircle, FaRocket, FaBan } from "react-icons/fa";
-import { Link, useNavigate , useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { format, isAfter, isBefore, isWithinInterval } from 'date-fns';
 //import { quizzes } from "../../Database";
@@ -24,13 +24,38 @@ import "./index.css";
 import { LuFileText } from "react-icons/lu";
 import { GoTriangleDown, GoTriangleRight } from "react-icons/go";
 import { CiCircleCheck } from "react-icons/ci";
+import axios from "axios";
 
+const API_BASE = process.env.REACT_APP_API_BASE;
 
 
 function Quizzes() {
+
   const navigate = useNavigate();
   const { courseId } = useParams();
+  const [quizzes, setQuizzes] = useState<any[]>([]);
+  const Quizzes_API = `${API_BASE}/api/quizzes/${courseId}`
+  const findAllQuizzes = async () => {
+    const response = await axios.get(Quizzes_API);
+    setQuizzes(response.data);
+  };
 
+
+  useEffect(() => {
+    findAllQuizzes();
+  }, []);
+
+
+
+  const handleDeleteQuiz = async (quizId: String) => {
+    const response = await axios.delete(
+      `${API_BASE}/api/quizzes/${quizId}`
+    );
+    setQuizzes(quizzes.filter((quiz) => quiz._id !== quizId));
+  }
+
+
+  // getCurrentDateInfo
   const getCurrentDateInfo = (quiz: any) => {
     const now = new Date();
     const availableDate = new Date(quiz.availableDate);
@@ -50,6 +75,7 @@ function Quizzes() {
     };
   };
 
+  //formats
   const successformat = "text-success";
   const secondaryFormat = "text-secondary";
 
@@ -57,22 +83,23 @@ function Quizzes() {
   const handleAddQuiz = async () => {
     // Define the default properties for a new quiz
     const newQuiz = {
-        title: 'New Quiz',
-        Id: 123
+      title: 'New Quiz',
+      Id: 123
     };
-  //   try {
-  //     // Dispatch an action to add the new quiz
-  //     // Assuming addQuiz is an async thunk, wait for the result
-  //     const resultAction = dispatch(addQuiz(newQuiz));
-  //     // Get the new quiz id from the result of the dispatched action
-  //     const newQuizId = resultAction.payload.id; // Adjust according to your state structure
-  //     // Navigate to the Quiz Details page for editing the new quiz
-  //     history.push(`/quiz/${newQuizId}/edit`);
-  // } catch (err) {
-  //     console.error('Failed to create the quiz: ', err);
-  // }
-  navigate(`/Kanbas/Courses/${courseId}/Quizzes/QuizDetails/${newQuiz.Id}`);
+    //   try {
+    //     // Dispatch an action to add the new quiz
+    //     // Assuming addQuiz is an async thunk, wait for the result
+    //     const resultAction = dispatch(addQuiz(newQuiz));
+    //     // Get the new quiz id from the result of the dispatched action
+    //     const newQuizId = resultAction.payload.id; // Adjust according to your state structure
+    //     // Navigate to the Quiz Details page for editing the new quiz
+    //     history.push(`/quiz/${newQuizId}/edit`);
+    // } catch (err) {
+    //     console.error('Failed to create the quiz: ', err);
+    // }
+    navigate(`/Kanbas/Courses/${courseId}/Quizzes/QuizDetails/${newQuiz.Id}`);
   }
+
 
   return (
     <>
@@ -80,14 +107,15 @@ function Quizzes() {
 
         <button> <FaEllipsisV /></button>
         <button className="assignment"
-        onClick={handleAddQuiz}> <GoPlus /> Quiz</button>
+          onClick={handleAddQuiz}> <GoPlus /> Quiz</button>
         <input className="search" placeholder="Search for Quiz" />
       </div>
 
+      <hr />
       <ul className="list-group wd-modules">
         <li className="list-group-item">
 
-          {/* This is the header of the assignments */}
+          {/* This is the header of the Quizzes */}
           <div>
             <RxDragHandleDots2 className="me-2" />
             <GoTriangleDown className="me-2" />
@@ -101,11 +129,55 @@ function Quizzes() {
           {/* These are the items */}
           <ul className="list-group ">
 
+            {
+              quizzes.map((quiz) => (
+                <li className="list-group-item" >
+                  <RxDragHandleDots2 className="me-2 align-center" />
+                  <FaRocket className={successformat} />
+
+                  <div className="assignment-description">
+                    <Link to="#" className="no-margin">
+                      {quiz.title}
+                    </Link>
+                    <br />
+                    Quiz Description
+                    {/* // Call getCurrentDateInfo for each quiz */}
+                    {/* const {aval, due} = getCurrentDateInfo(quiz); */}
+
+                <div>availabilityText</div>  Availability info
+                    <div>dueDate</div>
+                    <div>{quiz.points} pts | {quiz.numberOfQuestions} Questions</div>
+
+
+
+                  </div>
+                  <span className="float-end">
+                    {/* Change the logic to check if a quiz is published */}
+                    {quiz.isPublished ? (
+                      <FaCheckCircle className="text-success" />
+                    ) : (
+                      <FaCheckCircle className="text-muted" />
+                    )}
+                    <FaEllipsisV className="ms-2" />
+                    <span>
+                      <button onClick={() => dispatch(setQuiz(quiz))}>
+                        Edit
+                      </button>
+                      <button onClick={() => handleDeleteQuiz(quiz._id)}>
+                        Delete
+                      </button>
+
+                    </span>
+                  </span>
+
+                </li>))
+
+            }
 
             {/* published */}
             <li className="list-group-item" >
               <RxDragHandleDots2 className="me-2 align-center" />
-              <FaRocket className={successformat}  />
+              <FaRocket className={successformat} />
 
               <div className="assignment-description">
                 <Link to="#" className="no-margin">
@@ -151,16 +223,12 @@ function Quizzes() {
                 </Link>
                 <br />
                 Quiz description
-               
-                {/* // Call getCurrentDateInfo for each quiz
-                const { availabilityText, dueText } = getCurrentDateInfo(quiz); */}
-                {/* <div>{availabilityText}</div> {/* Availability info 
-                                <div>{dueText}</div> 
-                                <div>{quiz.points} pts | {quiz.numberOfQuestions} Questions</div> */}
+
+
               </div>
               <span className="float-end">
 
-                <FaBan className={secondaryFormat}/> {/* change here */} <FaEllipsisV className="ms-2" /> 
+                <FaBan className={secondaryFormat} />  <FaEllipsisV className="ms-2" />
                 <button>Edit</button>
                 <button>Delete</button>
               </span>
@@ -183,8 +251,8 @@ function Quizzes() {
                   <FaCheckCircle className="text-success" /><FaEllipsisV className="ms-2" /></span>
               </li>))} */}
           </ul>
-        </li>
-      </ul>
+        </li >
+      </ul >
     </>
   );
 }
