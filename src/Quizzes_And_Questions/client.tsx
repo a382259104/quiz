@@ -27,6 +27,7 @@ export interface Quiz {
     untilDate?: Date;
     questions: Question[],
     course:string;
+    published:boolean
 }
 
 export interface Question {
@@ -92,9 +93,9 @@ export const deleteQuiz = async (quiz: Quiz) => {
 };
 
 
-export const findAllQuestions = async () => {
+export const findAllQuestions = async (course:string) => {
     try {
-      const response = await axios.get(QUESTION_API);
+      const response = await axios.get(`${QUIZ_API}/${course}/questions`);
       return response.data;
     } catch (error) {
       console.error("Error fetching questions:", error);
@@ -102,9 +103,9 @@ export const findAllQuestions = async () => {
     }
   };
   
-  export const findQuestionById = async (question: Question) => {
+  export const findQuestionById = async (course:string,question: Question) => {
     try {
-      const response = await axios.get(`${QUESTION_API}/${question._id}`);
+      const response = await axios.get(`${QUIZ_API}/${course}/questions/${question._id}`);
       return response.data;
     } catch (error) {
       console.error("Error fetching question by ID:", error);
@@ -112,9 +113,9 @@ export const findAllQuestions = async () => {
     }
   };
   
-  export const createQuestion = async (question: Question) => {
+  export const createQuestion = async (course:string,question: Question) => {
     try {
-      const response = await axios.post(QUESTION_API, question);
+      const response = await axios.post(`${QUIZ_API}/${course}/questions`, question);
       return response.data;
     } catch (error) {
       console.error("Error creating question:", error);
@@ -122,9 +123,9 @@ export const findAllQuestions = async () => {
     }
   };
   
-  export const updateQuestion = async (question: Question) => {
+  export const updateQuestion = async (course:string,question: Question) => {
     try {
-      const response = await axios.put(`${QUESTION_API}/${question._id}`, question);
+      const response = await axios.put(`${QUIZ_API}/${course}/questions/${question._id}`, question);
       return response.data;
     } catch (error) {
       console.error("Error updating question:", error);
@@ -132,9 +133,9 @@ export const findAllQuestions = async () => {
     }
   };
   
-  export const deleteQuestion = async (question: Question) => {
+  export const deleteQuestion = async (course:string,question: Question) => {
     try {
-      const response = await axios.delete(`${QUESTION_API}/${question._id}`);
+      const response = await axios.delete(`${QUIZ_API}/${course}/questions/${question._id}`);
       return response.data;
     } catch (error) {
       console.error("Error deleting question:", error);
