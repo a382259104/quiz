@@ -1,10 +1,93 @@
 import React, { useState, useEffect } from 'react';
-import ReactQuill from 'react-quill'; // Import the editor you are using
-import 'react-quill/dist/quill.snow.css'; // Import quill CSS
+import { Quiz, findAllQuizzes, findQuizByCourse, createQuiz, updateQuiz, deleteQuiz } 
+from "../../../../Quizzes_And_Questions/client";
+import ReactQuill from 'react-quill'; 
+import 'react-quill/dist/quill.snow.css'; 
 import './style.css';
 import { useNavigate, useParams } from 'react-router';
 
 function QuizDetailEdit({ }) {
+
+  const [quizzes, setQuizzes] = useState<Quiz[]>([]);
+  const [selectedQuiz, setSelectedQuiz] = useState<Quiz | null>(null);
+  const [showQuestions, setQuestions] = useState(false);
+  const [newQuiz, setNewQuiz] = useState<Quiz>({
+      _id: "",
+      title: "",
+      description: "",
+      assignedto: "",
+      quizType: "Graded Quiz",
+      points: 0,
+      assignmentGroup: "Quizzes",
+      shuffleAnswers: "Yes",
+      timeLimit: 0,
+      multipleAttempts: "No",
+      showCorrectAnswers: "No",
+      accessCode: "",
+      oneQuestionAtATime: "Yes",
+      webcamRequired: "No",
+      lockQuestionsAfterAnswering: "No",
+      questions: [],
+      course: "RS101",
+      published: false
+  });
+
+
+  useEffect(() => {
+      fetchQuizzes();
+  }, []);
+
+  const fetchQuizzes = async () => {
+      try {
+          const data = await findAllQuizzes();
+          setQuizzes(data);
+      } catch (error) {
+          console.error("Error fetching quizzes:", error);
+      }
+  };
+
+  const handleCreateQuiz = async () => {
+      try {
+          await createQuiz(newQuiz);
+          fetchQuizzes();
+      } catch (error) {
+          console.error("Error creating quiz:", error);
+      }
+  };
+
+  const handleUpdateQuiz = async () => {
+      if (selectedQuiz) {
+          try {
+              await updateQuiz(selectedQuiz);
+              fetchQuizzes();
+          } catch (error) {
+              console.error("Error updating quiz:", error);
+          }
+      }
+  };
+
+  const handleSelectQuiz = async (quiz: Quiz) => {
+      setSelectedQuiz(quiz);
+  };
+
+  const handleChangeSelectedQuiz = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+      if (selectedQuiz) {
+          setSelectedQuiz({ ...selectedQuiz, [e.target.name]: e.target.value });
+      }
+  };
+
+
+  const handleDeleteQuiz = async (quiz: Quiz) => {
+      try {
+          await deleteQuiz(quiz);
+          fetchQuizzes(); // Refresh quiz list after deletion
+      } catch (error) {
+          console.error("Error deleting quiz:", error);
+      }
+  };
+
+
+
 
     const navigate = useNavigate();
     const { courseId, quizId } = useParams();

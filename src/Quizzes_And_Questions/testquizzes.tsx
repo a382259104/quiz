@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Quiz, findAllQuizzes, findQuizById, createQuiz, updateQuiz, deleteQuiz } from "./client";
+import { Quiz, findQuizByCourse, createQuiz, updateQuiz, deleteQuiz } from "./client";
 import TestQuestions from "./testquestions";
 
 function TestQuizzes() {
@@ -34,7 +34,7 @@ function TestQuizzes() {
 
     const fetchQuizzes = async () => {
         try {
-            const data = await findAllQuizzes();
+            const data = await findQuizByCourse(newQuiz);
             setQuizzes(data);
         } catch (error) {
             console.error("Error fetching quizzes:", error);

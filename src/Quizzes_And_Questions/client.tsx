@@ -52,12 +52,12 @@ export const findAllQuizzes = async () => {
     }
 };
 
-export const findQuizById = async (quiz: Quiz) => {
+export const findQuizByCourse = async (quiz: Quiz) => {
     try {
-        const response = await axios.get(`${QUIZ_API}/${quiz._id}`);
+        const response = await axios.get(`${QUIZ_API}/${quiz.course}`);
         return response.data;
     } catch (error) {
-        console.error("Error fetching quiz by ID:", error);
+        console.error("Error fetching quiz by course:", error);
         throw error;
     }
 };

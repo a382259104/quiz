@@ -1,9 +1,11 @@
 import { Navigate, Route, Routes, useLocation, useNavigate, useParams } from "react-router";
+
 import QuizDetailEdit from "./QuizDetailEdit";
 import QuizQustionEdit from "./QuizQustionEdit";
 
 
 import { Link, NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function QuizEdit() {
     let location = useLocation();
@@ -13,7 +15,8 @@ function QuizEdit() {
     // This base path should be the path to reach the QuizEdit component (e.g., '/edit/quiz/:id')
     let basePath = `/Kanbas/Courses/${courseId}/Quizzes/EditQuizDetail/${quizId}`;
 
-    
+
+
     return (
         <>
             <h1> Quiz Edit</h1>
@@ -25,13 +28,13 @@ function QuizEdit() {
                     Questions
                 </NavLink>
             </nav>
-        
+
             <div>
-            <Routes>
-                <Route index element={<Navigate to="details" replace />} />
-                <Route path="details" element={<QuizDetailEdit />} />
-                <Route path="questions" element={<QuizQustionEdit />} />
-            </Routes>
+                <Routes>
+                    <Route index element={<Navigate to="details" replace />} />
+                    <Route path="details" element={<QuizDetailEdit />} />
+                    <Route path="questions" element={<QuizQustionEdit />} />
+                </Routes>
             </div>
         </>
     )
