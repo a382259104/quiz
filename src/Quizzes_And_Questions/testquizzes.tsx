@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Quiz, findAllQuizzes, findQuizById, createQuiz, updateQuiz, deleteQuiz } from "./client";
 
-function TestPage() {
+function TestQuizzes() {
     const [quizzes, setQuizzes] = useState<Quiz[]>([]);
     const [selectedQuiz, setSelectedQuiz] = useState<Quiz | null>(null);
     const [newQuiz, setNewQuiz] = useState<Quiz>({
@@ -167,4 +167,4 @@ function TestPage() {
     );
 }
 
-export default TestPage;
+export default TestQuizzes;
