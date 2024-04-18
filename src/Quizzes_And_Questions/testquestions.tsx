@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Question, findAllQuestions, findQuestionById, createQuestion, updateQuestion, deleteQuestion } from "./client";
 
-function TestQuestions() {
+function TestQuestions(courseObject:any) {
+  
+  
+  console.log(`Our course is ${courseObject.course}`)
+  const course = courseObject.course
+
+
   const [questions, setQuestions] = useState<Question[]>([]);
   const [selectedQuestion, setSelectedQuestion] = useState<Question | null>(null);
   const [newQuestion, setNewQuestion] = useState<Question>({
@@ -22,7 +28,7 @@ function TestQuestions() {
 
   const fetchQuestions = async () => {
     try {
-      const data = await findAllQuestions();
+      const data = await findAllQuestions(course);
       setQuestions(data);
     } catch (error) {
       console.error("Error fetching questions:", error);
@@ -31,7 +37,7 @@ function TestQuestions() {
 
   const handleCreateQuestion = async () => {
     try {
-      await createQuestion(newQuestion);
+      await createQuestion(course,newQuestion);
       fetchQuestions();
     } catch (error) {
       console.error("Error creating question:", error);
@@ -41,7 +47,7 @@ function TestQuestions() {
   const handleUpdateQuestion = async () => {
     if (selectedQuestion) {
       try {
-        await updateQuestion(selectedQuestion);
+        await updateQuestion(course,selectedQuestion);
         fetchQuestions();
       } catch (error) {
         console.error("Error updating question:", error);
@@ -61,7 +67,7 @@ function TestQuestions() {
 
   const handleDeleteQuestion = async (question: Question) => {
     try {
-      await deleteQuestion(question);
+      await deleteQuestion(course,question);
       fetchQuestions(); // Refresh question list after deletion
     } catch (error) {
       console.error("Error deleting question:", error);
