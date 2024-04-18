@@ -19,7 +19,9 @@ function TestQuizzes() {
         accessCode: "",
         oneQuestionAtATime: "Yes",
         webcamRequired: "No",
-        lockQuestionsAfterAnswering: "No"
+        lockQuestionsAfterAnswering: "No",
+        questions:[],
+        course:"RS101"
     });
 
 
