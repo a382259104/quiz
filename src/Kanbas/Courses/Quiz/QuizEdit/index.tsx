@@ -1,13 +1,26 @@
 import { Navigate, Route, Routes, useLocation, useParams } from "react-router";
 import QuizDetailEdit from "./QuizDetailEdit";
 import QuizQustionEdit from "./QuizQustionEdit";
-import Nav from "../../../../Nav";
+
+
+import { Link } from "react-router-dom";
 
 function QuizEdit() {
+    let location = useLocation();
+    let { pathname } = location;
+
+    // Extract the base path without the last segment
+    let basePath = pathname.substring(0, pathname.lastIndexOf('/'));
+    
     return (
         <>
-        {/* Bug Here */}
-            <Nav />
+            <nav className="nav nav-tabs mt-2">
+                <Link to={`${basePath}/details`}
+                      className={`nav-link ${pathname.includes(`${basePath}/details`) ? "active" : ""}`}>Details</Link>
+                <Link to={`${basePath}/questions`}
+                      className={`nav-link ${pathname.includes(`${basePath}/questions`) ? "active" : ""}`}>Questions</Link>
+            </nav>
+        
             <div>
                 <Routes>
                     <Route path="/" element={<Navigate to="EditQuizDetail/*" />} />
