@@ -1,32 +1,37 @@
-import { Navigate, Route, Routes, useLocation, useParams } from "react-router";
+import { Navigate, Route, Routes, useLocation, useNavigate, useParams } from "react-router";
 import QuizDetailEdit from "./QuizDetailEdit";
 import QuizQustionEdit from "./QuizQustionEdit";
 
 
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function QuizEdit() {
     let location = useLocation();
-    let { pathname } = location;
+    let { courseId, quizId } = useParams();
+    let navigate = useNavigate();
 
-    // Extract the base path without the last segment
-    let basePath = pathname.substring(0, pathname.lastIndexOf('/'));
+    // This base path should be the path to reach the QuizEdit component (e.g., '/edit/quiz/:id')
+    let basePath = `/Kanbas/Courses/${courseId}/Quizzes/EditQuizDetail/${quizId}`;
+
     
     return (
         <>
+            <h1> Quiz Edit</h1>
             <nav className="nav nav-tabs mt-2">
-                <Link to={`${basePath}/details`}
-                      className={`nav-link ${pathname.includes(`${basePath}/details`) ? "active" : ""}`}>Details</Link>
-                <Link to={`${basePath}/questions`}
-                      className={`nav-link ${pathname.includes(`${basePath}/questions`) ? "active" : ""}`}>Questions</Link>
+                <NavLink to={`${basePath}/details`} className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+                    Details
+                </NavLink>
+                <NavLink to={`${basePath}/questions`} className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+                    Questions
+                </NavLink>
             </nav>
         
             <div>
-                <Routes>
-                    <Route path="/" element={<Navigate to="EditQuizDetail/*" />} />
-                    <Route path="/EditQuizDetail/*" element={<QuizDetailEdit />} />
-                    <Route path="/EditQuestions/*" element={<QuizQustionEdit />} />
-                </Routes>
+            <Routes>
+                <Route index element={<Navigate to="details" replace />} />
+                <Route path="details" element={<QuizDetailEdit />} />
+                <Route path="questions" element={<QuizQustionEdit />} />
+            </Routes>
             </div>
         </>
     )

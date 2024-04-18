@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import QuizEdit from './QuizEdit';
 
 // Mock function to simulate publishing/unpublishing
@@ -8,14 +8,25 @@ const publishQuiz = async (id:any, isPublished:any) => {
     return !isPublished;
 };
 
-  
+// const fetchQuizDetails = async (id) => {
+//   // Placeholder for actual API call to fetch quiz details by ID
+//   return {
+//       id,
+//       title: 'Q1 - HTML',
+//       // ... other quiz properties
+//   };
+// };  
 function QuizDetails() {
-  let { id } = useParams(); // This hook gives us access to the URL parameters
-    const { courseId } = useParams();
+  const { courseId, id } = useParams();
+  const location = useLocation();
+
+    // Extract the last segment from the pathname as the quiz ID
+    const pathSegments = location.pathname.split('/');
+    const quizId = pathSegments[pathSegments.length - 1];
     const navigate = useNavigate();
 
     const [quiz, setQuiz] = useState({
-        id,
+        id: quizId,
         title: 'Q1 - HTML',
         type: 'Graded Quiz',
         points: 29,
@@ -42,12 +53,16 @@ function QuizDetails() {
     
       const handlePreview = () => {
         // Navigate to the Quiz Preview page
-        navigate(`/Kanbas/Courses/${courseId}/Quizzes/QuizPreview/${quiz.id}`);
+        navigate(`/Kanbas/Courses/${courseId}/Quizzes/QuizPreview/${quizId}`);
       };
     
       const handleEdit = () => {
-        // Navigate to the Quiz Editor page
-        navigate(`/Kanbas/Courses/${courseId}/Quizzes/EditQuizDetail/${quiz.id}`);
+        
+        if (courseId && quiz?.id) {
+          navigate(`/Kanbas/Courses/${courseId}/Quizzes/EditQuizDetail/${quizId}`);
+        } else {
+          console.error('Missing courseId or quiz.id');
+        }
       };
   
   return (
