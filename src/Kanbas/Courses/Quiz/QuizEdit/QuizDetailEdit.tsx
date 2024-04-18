@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill'; // Import the editor you are using
 import 'react-quill/dist/quill.snow.css'; // Import quill CSS
 import './style.css';
+import { useNavigate, useParams } from 'react-router';
 
 function QuizDetailEdit({ }) {
+
+    const navigate = useNavigate();
+    const { courseId, quizId } = useParams();
   const [quiz, setQuiz] = useState({
     title: '',
     description: '',
@@ -31,6 +35,36 @@ function QuizDetailEdit({ }) {
 
     const handleChange = (key:any, value:any) => {
     setQuiz({ ...quiz, [key]: value });
+    };
+    
+
+
+  // Event handler for 'Save'
+  const handleSave = async () => {
+    // send the quiz data to your server:
+    // await saveQuizDetails(quiz);
+    // For now, just log to the console:
+    console.log('Saving quiz:', quiz);
+
+    // Navigate to the Quiz Details screen
+    navigate(`/Kanbas/Courses/${courseId}/Quizzes/QuizDetails/${quizId}`);
+  };
+
+  // Event handler for 'Save and Publish'
+  const handleSaveAndPublish = async () => {
+    // Save and then publish the quiz
+    // await saveQuizDetails(quiz);
+    // await publishQuiz(quizId);
+    console.log('Saving and publishing quiz:', quiz);
+
+    // Navigate to the Quiz List screen
+    navigate(`/Kanbas/Courses/${courseId}/Quizzes`);
+  };
+
+  // Event handler for 'Cancel'
+  const handleCancel = () => {
+    // Navigate back to the Quiz List screen without saving
+    navigate(`/Kanbas/Courses/${courseId}/Quizzes`);
   };
 
   return (
@@ -128,7 +162,10 @@ function QuizDetailEdit({ }) {
         <input type="date" id="until-date" value={quiz.untilDate} onChange={(e) => handleChange('untilDate', e.target.value)} />
 
 
-      <button type="submit">Save Changes</button>
+        <button type="button" onClick={handleSave}>Save</button>
+      <button type="button" onClick={handleSaveAndPublish}>Save and Publish</button>
+      <button type="button" onClick={handleCancel}>Cancel</button>
+   
     </form>
   );
 }

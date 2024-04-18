@@ -1,4 +1,6 @@
-function QuizQustionEdit(){
+
+
+function QuizQustionEdit() {
     return(
 <></>
     )
