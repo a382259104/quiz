@@ -25,6 +25,8 @@ export interface Quiz {
     dueDate?: Date;
     availableDate?: Date;
     untilDate?: Date;
+    questions: Question[],
+    course:string;
 }
 
 export interface Question {

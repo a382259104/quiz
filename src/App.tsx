@@ -5,6 +5,7 @@ import HelloWorld from './Labs/a3/HelloWorld';
 import { HashRouter, Link } from 'react-router-dom';
 import TestQuizzes from './Quizzes_And_Questions/testquizzes';
 import TestQuestions from './Quizzes_And_Questions/testquestions';
+import QuizPreview from './Kanbas/Courses/Quizzes/preview';
 function App() {
 
     const currentScreen = "home";
@@ -19,6 +20,7 @@ function App() {
                     <Route path="/hello"    element={<HelloWorld/>}/>
                     <Route path="/testquizzes"    element={<TestQuizzes/>}/>
                     <Route path="/testquestions"    element={<TestQuestions/>}/>
+                    <Route path="/quizpreview"    element={<QuizPreview/>}/>
                 </Routes>
 
                 </div>
