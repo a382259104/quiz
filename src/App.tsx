@@ -3,6 +3,7 @@ import Kanbas from './Kanbas/index';
 import Labs from './Labs';
 import HelloWorld from './Labs/a3/HelloWorld';
 import { HashRouter, Link } from 'react-router-dom';
+import QuizEdit from './Kanbas/Courses/Quiz/QuizEdit';
 import TestQuizzes from './Quizzes_And_Questions/testquizzes';
 import TestQuestions from './Quizzes_And_Questions/testquestions';
 import QuizPreview from './Kanbas/Courses/Quizzes/preview';
