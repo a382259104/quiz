@@ -1,134 +1,93 @@
 import React, { useState, useEffect } from 'react';
-import { Quiz, findAllQuizzes, findQuizByCourse, createQuiz, updateQuiz, deleteQuiz } 
-from "../../../../Quizzes_And_Questions/client";
-import ReactQuill from 'react-quill'; 
-import 'react-quill/dist/quill.snow.css'; 
+import { Quiz, findAllQuizzes, findQuizById, createQuiz, updateQuiz, deleteQuiz }
+  from "../../../../Quizzes_And_Questions/client";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import './style.css';
 import { useNavigate, useParams } from 'react-router';
 
-function QuizDetailEdit({ }) {
+function QuizDetailEdit() {
 
-  const [quizzes, setQuizzes] = useState<Quiz[]>([]);
-  const [selectedQuiz, setSelectedQuiz] = useState<Quiz | null>(null);
   const [showQuestions, setQuestions] = useState(false);
-  const [newQuiz, setNewQuiz] = useState<Quiz>({
-      _id: "",
-      title: "",
-      description: "",
-      assignedto: "",
-      quizType: "Graded Quiz",
-      points: 0,
-      assignmentGroup: "Quizzes",
-      shuffleAnswers: "Yes",
-      timeLimit: 0,
-      multipleAttempts: "No",
-      showCorrectAnswers: "No",
-      accessCode: "",
-      oneQuestionAtATime: "Yes",
-      webcamRequired: "No",
-      lockQuestionsAfterAnswering: "No",
-      questions: [],
-      course: "RS101",
-      published: false
+
+  
+  const [quiz, setQuiz] = useState<Quiz>({
+    _id: "",
+    title: "",
+    description: "",
+    assignedto: "",
+    quizType: "Graded Quiz",
+    points: 0,
+    assignmentGroup: "Quizzes",
+    shuffleAnswers: "Yes",
+    timeLimit: 0,
+    multipleAttempts: "No",
+    showCorrectAnswers: "No",
+    accessCode: "",
+    oneQuestionAtATime: "Yes",
+    webcamRequired: "No",
+    lockQuestionsAfterAnswering: "No",
+    questions: [],
+    course: "RS101",
+    published: false
   });
-
-
-  useEffect(() => {
-      fetchQuizzes();
-  }, []);
-
-  const fetchQuizzes = async () => {
-      try {
-          const data = await findAllQuizzes();
-          setQuizzes(data);
-      } catch (error) {
-          console.error("Error fetching quizzes:", error);
-      }
-  };
+  
 
   const handleCreateQuiz = async () => {
-      try {
-          await createQuiz(newQuiz);
-          fetchQuizzes();
-      } catch (error) {
-          console.error("Error creating quiz:", error);
-      }
-  };
-
-  const handleUpdateQuiz = async () => {
-      if (selectedQuiz) {
-          try {
-              await updateQuiz(selectedQuiz);
-              fetchQuizzes();
-          } catch (error) {
-              console.error("Error updating quiz:", error);
-          }
-      }
-  };
-
-  const handleSelectQuiz = async (quiz: Quiz) => {
-      setSelectedQuiz(quiz);
-  };
-
-  const handleChangeSelectedQuiz = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-      if (selectedQuiz) {
-          setSelectedQuiz({ ...selectedQuiz, [e.target.name]: e.target.value });
-      }
+    try {
+      await createQuiz(quiz);
+      fetchQuizzes();
+    } catch (error) {
+      console.error("Error creating quiz:", error);
+    }
   };
 
 
   const handleDeleteQuiz = async (quiz: Quiz) => {
-      try {
-          await deleteQuiz(quiz);
-          fetchQuizzes(); // Refresh quiz list after deletion
-      } catch (error) {
-          console.error("Error deleting quiz:", error);
-      }
+    try {
+      await deleteQuiz(quiz);
+      fetchQuizzes(); // Refresh quiz list after deletion
+    } catch (error) {
+      console.error("Error deleting quiz:", error);
+    }
+  };
+
+
+  const navigate = useNavigate();
+  const { courseId, quizId } = useParams();
+
+
+  const fetchQuizzes = async () => {
+    try {
+      const data = await findQuizById(quiz);
+      setQuiz(data);
+    } catch (error) {
+      console.error("Error fetching quizzes:", error);
+    }
   };
 
 
 
+// EVERYTHING BELOW IS THE CODE FROM BEFORE, I WILL START CHANGING EVERYTHING 
 
-    const navigate = useNavigate();
-    const { courseId, quizId } = useParams();
-  const [quiz, setQuiz] = useState({
-    title: '',
-    description: '',
-    type: 'Graded Quiz',
-    points: 0,
-    assignmentGroup: 'Quizzes',
-    shuffleAnswers: 'Yes',
-    timeLimit: '20 Minutes',
-    multipleAttempts: 'No',
-    showCorrectAnswers: '',
-    accessCode: '',
-    oneQuestionAtATime: 'Yes',
-    webcamRequired: 'No',
-    lockQuestionsAfterAnswering: 'No',
-    dueDate: '',
-    availableDate: '',
-    untilDate: ''
-  });
-
-//   // Simulate fetching data
-//   useEffect(() => {
-//     // Fetch quiz data here and update state
-//     // setQuiz(fetchedData);
-//   }, [quizId]);
-
-    const handleChange = (key:any, value:any) => {
+  const handleChange = (key: any, value: any) => {
     setQuiz({ ...quiz, [key]: value });
-    };
-    
+  };
 
 
   // Event handler for 'Save'
   const handleSave = async () => {
-    // send the quiz data to your server:
-    // await saveQuizDetails(quiz);
-    // For now, just log to the console:
     console.log('Saving quiz:', quiz);
 
+    if (quiz) {
+      try {
+        console.log(`this is the quiz id: ${quiz._id}`)
+        await updateQuiz(quiz);
+        fetchQuizzes();
+      } catch (error) {
+        console.error("Error updating quiz:", error);
+      }
+    }
     // Navigate to the Quiz Details screen
     navigate(`/Kanbas/Courses/${courseId}/Quizzes/QuizDetails/${quizId}`);
   };
@@ -150,6 +109,27 @@ function QuizDetailEdit({ }) {
     navigate(`/Kanbas/Courses/${courseId}/Quizzes`);
   };
 
+  useEffect(() => {
+    fetchQuizzes();
+  }, []);
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <form className="quiz-form">
       <label>Title:</label>
@@ -164,21 +144,21 @@ function QuizDetailEdit({ }) {
       <ReactQuill
         theme="snow"
         value={quiz.description}
-        onChange={(value:any) => handleChange('description', value)}
+        onChange={(value: any) => handleChange('description', value)}
         style={{ height: '200px' }}
       />
 
-          <br />
-          <br />
-    
-    <label htmlFor="points">Points:</label>
-    <input type="text" style={{ width: "10%", height: "30px" }} id="points" value={quiz.points} readOnly />
-          
-    <label htmlFor="time-limit">Time Limit:</label>
-    <input type="number" id="time-limit" value={quiz.timeLimit || 20} onChange={(e) => handleChange('timeLimit', e.target.value)} /> Minutes
+      <br />
+      <br />
+
+      <label htmlFor="points">Points:</label>
+      <input type="text" style={{ width: "10%", height: "30px" }} id="points" value={quiz.points} readOnly />
+
+      <label htmlFor="time-limit">Time Limit:</label>
+      <input type="number" id="time-limit" value={quiz.timeLimit || 20} onChange={(e) => handleChange('timeLimit', e.target.value)} /> Minutes
 
       <label>Quiz Type:</label>
-      <select value={quiz.type} onChange={(e) => handleChange('type', e.target.value)}>
+      <select value={quiz.quizType} onChange={(e) => handleChange('type', e.target.value)}>
         <option value="Graded Quiz">Graded Quiz</option>
         <option value="Practice Quiz">Practice Quiz</option>
         <option value="Graded Survey">Graded Survey</option>
@@ -200,55 +180,56 @@ function QuizDetailEdit({ }) {
       </select>
 
       <label htmlFor="multiple-attempts">Multiple Attempts:</label>
-        <select id="multiple-attempts" value={quiz.multipleAttempts} onChange={(e) => handleChange('multipleAttempts', e.target.value)}>
-            <option value="No">No</option>
-            <option value="Yes">Yes</option>
-          </select>
-          
-          <label htmlFor="show-correct-answers">Show Correct Answers:</label>
-  <input type="text" id="show-correct-answers" value={quiz.showCorrectAnswers} onChange={(e) => handleChange('showCorrectAnswers', e.target.value)} />
+      <select id="multiple-attempts" value={quiz.multipleAttempts} onChange={(e) => handleChange('multipleAttempts', e.target.value)}>
+        <option value="No">No</option>
+        <option value="Yes">Yes</option>
+      </select>
 
-  <label htmlFor="access-code">Access Code:</label>
-  <input type="text" id="access-code" value={quiz.accessCode} onChange={(e) => handleChange('accessCode', e.target.value)} />
+      <label htmlFor="show-correct-answers">Show Correct Answers:</label>
+      <input type="text" id="show-correct-answers" value={quiz.showCorrectAnswers} onChange={(e) => handleChange('showCorrectAnswers', e.target.value)} />
 
-  <label htmlFor="one-question-at-a-time">One Question at a Time:</label>
-  <select id="one-question-at-a-time" value={quiz.oneQuestionAtATime} onChange={(e) => handleChange('oneQuestionAtATime', e.target.value)}>
-    <option value="Yes">Yes</option>
-    <option value="No">No</option>
-  </select>
+      <label htmlFor="access-code">Access Code:</label>
+      <input type="text" id="access-code" value={quiz.accessCode} onChange={(e) => handleChange('accessCode', e.target.value)} />
 
-  <label htmlFor="webcam-required">Webcam Required:</label>
-  <select id="webcam-required" value={quiz.webcamRequired} onChange={(e) => handleChange('webcamRequired', e.target.value)}>
-    <option value="No">No</option>
-    <option value="Yes">Yes</option>
-  </select>
+      <label htmlFor="one-question-at-a-time">One Question at a Time:</label>
+      <select id="one-question-at-a-time" value={quiz.oneQuestionAtATime} onChange={(e) => handleChange('oneQuestionAtATime', e.target.value)}>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
 
-  <label htmlFor="lock-questions-after-answering">Lock Questions After Answering:</label>
-  <select id="lock-questions-after-answering" value={quiz.lockQuestionsAfterAnswering} onChange={(e) => handleChange('lockQuestionsAfterAnswering', e.target.value)}>
-    <option value="No">No</option>
-    <option value="Yes">Yes</option>
-  </select>
+      <label htmlFor="webcam-required">Webcam Required:</label>
+      <select id="webcam-required" value={quiz.webcamRequired} onChange={(e) => handleChange('webcamRequired', e.target.value)}>
+        <option value="No">No</option>
+        <option value="Yes">Yes</option>
+      </select>
 
-      {/* Repeat for other fields as shown above */}
+      <label htmlFor="lock-questions-after-answering">Lock Questions After Answering:</label>
+      <select id="lock-questions-after-answering" value={quiz.lockQuestionsAfterAnswering} onChange={(e) => handleChange('lockQuestionsAfterAnswering', e.target.value)}>
+        <option value="No">No</option>
+        <option value="Yes">Yes</option>
+      </select>
+
 
       <label>Due Date:</label>
       <input
         type="date"
-        value={quiz.dueDate}
+        value={quiz.untilDate ? quiz.untilDate.toISOString().slice(0, 10) : ''}
         onChange={(e) => handleChange('dueDate', e.target.value)}
-          />
-          
+      />
+
       <label htmlFor="available-date">Available Date:</label>
-        <input type="date" id="available-date" value={quiz.availableDate} onChange={(e) => handleChange('availableDate', e.target.value)} />
+      <input type="date" id="available-date" value={quiz.availableDate ? quiz.availableDate.toISOString().slice(0, 10) : ''}
+       onChange={(e) => handleChange('availableDate', e.target.value)} />
 
-        <label htmlFor="until-date">Until Date:</label>
-        <input type="date" id="until-date" value={quiz.untilDate} onChange={(e) => handleChange('untilDate', e.target.value)} />
+      <label htmlFor="until-date">Until Date:</label>
+      <input type="date" id="until-date" value={quiz.untilDate ? quiz.untilDate.toISOString().slice(0, 10) : ''}
+       onChange={(e) => handleChange('untilDate', e.target.value)} />
 
 
-        <button type="button" onClick={handleSave}>Save</button>
+      <button type="button" onClick={handleSave}>Save</button>
       <button type="button" onClick={handleSaveAndPublish}>Save and Publish</button>
       <button type="button" onClick={handleCancel}>Cancel</button>
-   
+
     </form>
   );
 }

@@ -81,6 +81,20 @@ function TestQuizzes() {
         }
     };
 
+      //  THIS IS THE SECTION FOR FRONT END
+
+
+
+
+
+
+
+
+
+
+
+
+   
     return (
         <>
             <h1>Test Page for Quizzes</h1>
