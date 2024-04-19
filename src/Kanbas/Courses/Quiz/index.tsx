@@ -59,7 +59,7 @@ function Quizzes() {
   const getCurrentDateInfo = (quiz: any) => {
     const now = new Date();
     const availableDate = new Date(quiz.availableDate);
-    const availableUntilDate = new Date(quiz.availableUntilDate);
+    const availableUntilDate = new Date(quiz.untilDate);
     const dueDate = new Date(quiz.dueDate);
 
     let availabilityText = 'Closed';
