@@ -1,7 +1,7 @@
 import React from "react";
 import { FaCheckCircle, FaEllipsisV, FaPlusCircle, FaRocket, FaBan } from "react-icons/fa";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { createQuiz } from "../../../Quizzes_And_Questions/client";
+import { createQuiz,updateQuiz } from "../../../Quizzes_And_Questions/client";
 
 import { format, isAfter, isBefore, isWithinInterval } from 'date-fns';
 //import { quizzes } from "../../Database";
@@ -35,6 +35,17 @@ function Quizzes() {
     setQuizzes(response.data);
   };
 
+  const handlePublishToggle = async (quiz:any) => {
+    quiz.published = !quiz.published;
+    try{
+      await updateQuiz(quiz);
+      findAllQuizzes()
+      console.log(quizzes[0].published)
+    } catch(error) {
+      console.log("cannot publish quiz")
+    }
+  };
+
 
   useEffect(() => {
     findAllQuizzes();
@@ -49,8 +60,7 @@ function Quizzes() {
     setQuizzes(quizzes.filter((quiz) => quiz._id !== quizId));
   }
 
-  const handleSetQuiz = async (quizId: String) => {
-    // navigate(`QuizDetails/${quizId}`)
+  const navigateToDetails = async (quizId: String) => {
     navigate(`/Kanbas/Courses/${courseId}/Quizzes/QuizDetails/${quizId}`);
   }
 
@@ -164,7 +174,7 @@ function Quizzes() {
                 <li className="list-group-item" >
                   <RxDragHandleDots2 className="me-2 align-center " />
 
-                  {quiz.isPublished ? (
+                  {quiz.published ? (
                     <FaRocket className={successformat} />
                   ) : (
                     <FaRocket className={secondaryFormat} />
@@ -173,7 +183,7 @@ function Quizzes() {
 
                   <span>
                     <div className="assignment-description">
-                      <Link to="#" className="no-margin">
+                      <Link to={`/Kanbas/Courses/${courseId}/Quizzes/QuizDetails/${quiz._id}`} className="no-margin">
                         {quiz.title}
                       </Link>
                       <br />
@@ -186,14 +196,20 @@ function Quizzes() {
 
                   <span className="float-end">
                     {/* Change the logic to check if a quiz is published */}
-                    {quiz.isPublished ? (
-                      <FaCheckCircle className="text-success" />
+                    {quiz.published ? (
+                      <FaCheckCircle className="text-success" 
+                      onClick={()=>handlePublishToggle(quiz)}/>
                     ) : (
-                      <FaBan className="text-muted" />
+                      <>
+                        <FaBan className="text-muted"
+                        onClick={()=>handlePublishToggle(quiz)} />
+
+                      </>
+
                     )}
                     <FaEllipsisV className="ms-2" />
 
-                    <button onClick={() => handleSetQuiz(quiz._id)} className="goodButton">
+                    <button onClick={() => navigateToDetails(quiz._id)} className="goodButton">
                       Edit
                     </button>
                     <button onClick={() => handleDeleteQuiz(quiz._id)} className="goodButton">

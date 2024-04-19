@@ -147,24 +147,25 @@ function QuizDetailEdit() {
       />
 
       <label>Quiz instruction:</label>
-      {/* <ReactQuill
+      <ReactQuill
         theme="snow"
         value={quiz.description}
         onChange={(value: any) => handleChange('description', value)}
         style={{ height: '200px' }}
-      /> */}
+      />
 
       <br />
       <br />
 
       <label htmlFor="points">Points:</label>
-      <input type="text" style={{ width: "10%", height: "30px" }} id="points" value={quiz.points} readOnly />
+      <input type="text" style={{ width: "10%", height: "30px" }} id="points" 
+      onChange={(e) => handleChange('points', e.target.value)} value={quiz.points} />
 
       <label htmlFor="time-limit">Time Limit:</label>
       <input type="number" id="time-limit" value={quiz.timeLimit || 20} onChange={(e) => handleChange('timeLimit', e.target.value)} /> Minutes
 
       <label>Quiz Type:</label>
-      <select value={quiz.quizType} onChange={(e) => handleChange('type', e.target.value)}>
+      <select id ="quizType" value={quiz.quizType} onChange={(e) => handleChange('quizType', e.target.value)}>
         <option value="Graded Quiz">Graded Quiz</option>
         <option value="Practice Quiz">Practice Quiz</option>
         <option value="Graded Survey">Graded Survey</option>
