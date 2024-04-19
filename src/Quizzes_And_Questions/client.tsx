@@ -60,9 +60,11 @@ export const findQuizByCourse = async (quiz: Quiz) => {
     }
 };
 
-export const findQuizById = async (quiz: Quiz) => {
+export const findQuizById = async (id:any) => {
   try {
-      const response = await axios.get(`${QUIZ_API}/findquiz/${quiz._id}`);
+
+    console.log(`Web client quiz::${id}`)
+      const response = await axios.get(`${QUIZ_API}/findquiz/${id}`);
       return response.data;
   } catch (error) {
       console.error("Error fetching quiz by course:", error);

@@ -19,18 +19,16 @@ const publishQuiz = async (_id: any, published: any) => {
 //   };
 // };  
 function QuizDetails() {
-  const { course_id, quizId } = useParams();
-  const location = useLocation();
+  const { courseId, quizId } = useParams();
+  console.log(`CourseID: ${courseId}, quizid: ${quizId}`)
 
-  // Extract the last segment from the pathname as the quiz _id
-  const pathSegments = location.pathname.split('/');
-  const quiz_id = pathSegments[pathSegments.length - 1];
+
   const navigate = useNavigate();
 
 
 
   const [quiz, setQuiz] = useState<Quiz>({
-    _id:  `${quizId}` ,
+    _id: `${quizId}`,
     title: "",
     description: "",
     assignedto: "",
@@ -58,23 +56,23 @@ function QuizDetails() {
 
   const handlePreview = () => {
     // Navigate to the Quiz Preview page
-    navigate(`/Kanbas/Courses/${course_id}/Quizzes/QuizPreview/${quiz_id}`);
+    navigate(`/Kanbas/Courses/${courseId}/Quizzes/QuizPreview/${quizId}`);
   };
 
   const handleEdit = () => {
 
-    console.log(`CourseID: ${course_id}, quizid: ${quiz._id}`)
-    if (course_id && quiz?._id) {
-      navigate(`/Kanbas/Courses/${course_id}/Quizzes/EditQuizDetail/${quiz_id}`);
+    console.log(`CourseID: ${courseId}, quizid: ${quiz._id}`)
+    if (courseId && quiz?._id) {
+      navigate(`/Kanbas/Courses/${courseId}/Quizzes/EditQuizDetail/${quizId}`);
     } else {
-      console.error('Missing course_id or quiz._id');
+      console.error('Missing courseId or quiz._id');
     }
   };
 
 
   // For test
   const handleEditNEW = () => {  
-      navigate(`/Kanbas/Courses/${course_id}/Quizzes/EditQuizDetail/${quizId}`);
+      navigate(`/Kanbas/Courses/${courseId}/Quizzes/EditQuizDetail/${quizId}`);
   };
 
 
@@ -84,10 +82,10 @@ function QuizDetails() {
 
   const fetchQuiz = async () => {
     try {
-      console.log(`this is the quiz id${quiz._id}`)
-      const data = await findQuizById(quiz);
-      setQuiz(data);
-      console.log(`Here is the quiz we have from the cloud:${data}`)
+      console.log(`this is the quiz id:${quizId}`)
+      console.log(quiz)
+      const data = await findQuizById(quizId);
+      setQuiz((prevQuiz) => ({ ...prevQuiz, ...data }));
     } catch (error) {
       console.error("Error fetching quizzes:", error);
     }

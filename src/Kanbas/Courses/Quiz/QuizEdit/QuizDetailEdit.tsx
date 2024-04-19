@@ -59,8 +59,8 @@ function QuizDetailEdit() {
 
   const fetchQuizzes = async () => {
     try {
-      const data = await findQuizById(quiz);
-      setQuiz(data);
+      const data = await findQuizById(quizId);
+      setQuiz((prevQuiz) => ({ ...prevQuiz, ...data }));
     } catch (error) {
       console.error("Error fetching quizzes:", error);
     }
@@ -111,7 +111,7 @@ function QuizDetailEdit() {
 
   useEffect(() => {
     fetchQuizzes();
-  }, []);
+  }, [quizId]);
 
   
 
