@@ -49,3 +49,37 @@
 .align-center {
     align-self: center;
 }
+
+
+.quizDetailTable tr td:first-child {
+    text-align: right;
+    font-weight:bold;
+    padding: 0 15px;
+
+}
+
+.quizDetailTable tr td:last-child {
+    text-align: left;
+    padding: 0 15px;
+}
+
+.quizTableButtom th {
+    text-align: left;
+    font-weight:bold;
+}
+
+
+.quizTableButtom{
+    width: 100%;
+}
+
+
+.quiz-detail-buttons {
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid gray !important;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    margin-left: 5;
+    margin-right: 5;
+}

@@ -147,13 +147,13 @@ function QuizDetailEdit() {
       />
 
       <label>Quiz instruction:</label>
-      <ReactQuill
+      {/* <ReactQuill
         theme="snow"
         value={quiz.description}
         onChange={(value: any) => handleChange('description', value)}
-        style={{ height: '200px' }}
-      />
-
+        style={{ height: '200px' }}/> */}
+      
+      
       <br />
       <br />
 

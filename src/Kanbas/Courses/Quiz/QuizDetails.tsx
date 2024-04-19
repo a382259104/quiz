@@ -71,8 +71,8 @@ function QuizDetails() {
 
 
   // For test
-  const handleEditNEW = () => {  
-      navigate(`/Kanbas/Courses/${courseId}/Quizzes/EditQuizDetail/${quizId}`);
+  const handleEditNEW = () => {
+    navigate(`/Kanbas/Courses/${courseId}/Quizzes/EditQuizDetail/${quizId}`);
   };
 
 
@@ -93,32 +93,105 @@ function QuizDetails() {
 
   return (
     <div>
-      <h1>Quiz Details</h1>
-      <h1>{quiz.title}</h1>
-      <div>Quiz Type: {quiz.quizType}</div>
-      <div>Points: {quiz.points}</div>
-      <div>Assignment Group: {quiz.assignmentGroup}</div>
-      <div>Shuffle Answers: {quiz.shuffleAnswers}</div>
-      <div>Time Limit: {quiz.timeLimit}</div>
-      <div>Multiple Attempts: {quiz.multipleAttempts}</div>
-      <div>Show Correct Answers: {quiz.showCorrectAnswers}</div>
-      <div>Access Code: {quiz.accessCode}</div>
-      <div>One Question at a Time: {quiz.oneQuestionAtATime}</div>
-      <div>Webcam Required: {quiz.webcamRequired}</div>
-      <div>Lock Questions After Answering: {quiz.lockQuestionsAfterAnswering}</div>
 
-      {quiz.dueDate && <div>Due Date: {new Date(quiz.dueDate).toLocaleString()}</div>}
-      {quiz.availableDate && 
-      <div>Available Date: {new Date(quiz.availableDate).toLocaleString()}</div>}
-      {quiz.untilDate && 
-      <div>Until Date: {new Date(quiz.untilDate).toLocaleString()}</div>}
-      <button onClick={handlePublishToggle}>
-        {quiz.published ? 'Unpublish' : 'Publish'}
-      </button>
-      <button onClick={handlePreview}>Preview</button>
-      <button onClick={handleEdit}>Edit</button>
-      {/* For test */}
-      <button onClick={handleEditNEW}>Edit New</button>
+      <div className='float-end'>
+        <button onClick={handlePublishToggle} className='quiz-detail-buttons '>
+          {quiz.published ? 'Unpublish' : 'Publish'}
+        </button>
+        <button onClick={handlePreview} className='quiz-detail-buttons'>Preview</button>
+        <button onClick={handleEdit} className='quiz-detail-buttons'>Edit</button>
+      </div>
+      <br/>
+      <hr />
+
+      <h1>{quiz.title}</h1>
+
+      <table>
+        <tbody className="quizDetailTable">
+          <tr>
+            <td>Quiz Type</td>
+            <td>{quiz.quizType}</td>
+          </tr>
+
+          <tr>
+            <td>Points</td>
+            <td>{quiz.points}</td>
+          </tr>
+
+          <tr>
+            <td>Assignment Group</td>
+            <td>{quiz.assignmentGroup}</td>
+          </tr>
+
+          <tr>
+            <td>Shuffle Answers</td>
+            <td>{quiz.shuffleAnswers}</td>
+          </tr>
+
+
+          <tr>
+            <td>Time Limit</td>
+            <td>{quiz.timeLimit}</td>
+          </tr>
+
+
+          <tr>
+            <td>Multiple Attempts</td>
+            <td>{quiz.multipleAttempts}</td>
+          </tr>
+
+          <tr>
+            <td>Show Correct Answers</td>
+            <td>{quiz.showCorrectAnswers}</td>
+          </tr>
+
+          <tr>
+            <td>Access Codes</td>
+            <td>{quiz.accessCode}</td>
+          </tr>
+
+
+          <tr>
+            <td>One Question at a Time</td>
+            <td>{quiz.oneQuestionAtATime}</td>
+          </tr>
+
+          <tr>
+            <td>Webcam Required</td>
+            <td>{quiz.webcamRequired}</td>
+          </tr>
+
+          <tr>
+            <td>Lock Questions After Answering</td>
+            <td>{quiz.lockQuestionsAfterAnswering}</td>
+          </tr>
+        </tbody>
+
+      </table>
+
+      <br />
+
+      <table className='quizTableButtom'>
+        <thead>
+          <th>Due</th>
+          <th>For</th>
+          <th>Avaliable from</th>
+          <th>Until</th>
+        </thead>
+
+
+        <tbody>
+          <tr>
+            <td>{quiz.dueDate && <div>{new Date(quiz.dueDate).toLocaleString()}</div>}</td>
+            <td>{quiz.assignedto}</td>
+            <td>{quiz.availableDate && <div>{new Date(quiz.availableDate).toLocaleString()}</div>}</td>
+            <td>{quiz.untilDate && <div>{new Date(quiz.untilDate).toLocaleString()}</div>}</td>
+          </tr>
+
+        </tbody>
+      </table>
+
+
 
     </div>
   );
