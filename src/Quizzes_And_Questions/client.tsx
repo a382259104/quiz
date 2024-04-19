@@ -1,10 +1,8 @@
 import axios from "axios";
 const BASE_API = process.env.REACT_APP_API_BASE;
 const QUIZ_API = `${BASE_API}/api/quizzes`;
-const QUESTION_API = `${BASE_API}/api/questions`;
 
 console.log(`This is the quiz api: ${QUIZ_API}`)
-console.log(`This is the question api: ${QUESTION_API}`)
 
 export interface Quiz {
     _id: string;
@@ -54,7 +52,7 @@ export const findAllQuizzes = async () => {
 
 export const findQuizByCourse = async (quiz: Quiz) => {
     try {
-        const response = await axios.get(`${QUIZ_API}/${quiz.course}`);
+        const response = await axios.get(`${QUIZ_API}/findquiz/${quiz.course}`);
         return response.data;
     } catch (error) {
         console.error("Error fetching quiz by course:", error);

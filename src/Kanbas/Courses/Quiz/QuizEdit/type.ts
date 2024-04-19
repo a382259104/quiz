@@ -19,7 +19,7 @@ export interface TrueFalseQuestion extends QuestionBase {
 }
 
 export interface FillInBlanksQuestion extends QuestionBase {
-    blanks: string[];
+    blanks: Array<{answer: string[]}>;  // Array of answers for each blank, allowing multiple correct answers per blank
 }
 
 export type Question = MultipleChoiceQuestion | TrueFalseQuestion | FillInBlanksQuestion;

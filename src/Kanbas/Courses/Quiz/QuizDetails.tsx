@@ -1,75 +1,103 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import QuizEdit from './QuizEdit';
+import { Quiz } from '../../../Quizzes_And_Questions/client';
+import { findQuizById } from '../../../Quizzes_And_Questions/client';
 
 // Mock function to simulate publishing/unpublishing
-const publishQuiz = async (id:any, isPublished:any) => {
-    // Placeholder for actual publish/unpublish logic
-    return !isPublished;
+const publishQuiz = async (_id: any, published: any) => {
+  // Placeholder for actual publish/unpublish logic
+  return !published;
 };
 
-// const fetchQuizDetails = async (id) => {
-//   // Placeholder for actual API call to fetch quiz details by ID
+// const fetchQuizDetails = async (_id) => {
+//   // Placeholder for actual API call to fetch quiz details by _id
 //   return {
-//       id,
+//       _id,
 //       title: 'Q1 - HTML',
 //       // ... other quiz properties
 //   };
 // };  
 function QuizDetails() {
-  const { courseId, id } = useParams();
+  const { course_id, quizId } = useParams();
   const location = useLocation();
 
-    // Extract the last segment from the pathname as the quiz ID
-    const pathSegments = location.pathname.split('/');
-    const quizId = pathSegments[pathSegments.length - 1];
-    const navigate = useNavigate();
+  // Extract the last segment from the pathname as the quiz _id
+  const pathSegments = location.pathname.split('/');
+  const quiz_id = pathSegments[pathSegments.length - 1];
+  const navigate = useNavigate();
 
-    const [quiz, setQuiz] = useState({
-        id: quizId,
-        title: 'Q1 - HTML',
-        type: 'Graded Quiz',
-        points: 29,
-        assignmentGroup: 'QUIZZES',
-        shuffleAnswers: 'No',
-        timeLimit: '20 Minutes',
-        multipleAttempts: 'No',
-        showCorrectAnswers: 'After Submission',
-        accessCode: '',
-        oneQuestionAtATime: 'Yes',
-        webcamRequired: 'No',
-        lockQuestionsAfterAnswering: 'No',
-        dueDate: '2024-04-30T23:59', // ISO string format for date
-        availableDate: '2024-04-01T00:00',
-        untilDate: '2024-05-01T23:59',
-        isPublished: false,
-      });
-    
-    
-      const handlePublishToggle = async () => {
-        const newStatus = await publishQuiz(quiz.id, quiz.isPublished);
-        setQuiz({ ...quiz, isPublished: newStatus });
-      };
-    
-      const handlePreview = () => {
-        // Navigate to the Quiz Preview page
-        navigate(`/Kanbas/Courses/${courseId}/Quizzes/QuizPreview/${quizId}`);
-      };
-    
-      const handleEdit = () => {
-        
-        if (courseId && quiz?.id) {
-          navigate(`/Kanbas/Courses/${courseId}/Quizzes/EditQuizDetail/${quizId}`);
-        } else {
-          console.error('Missing courseId or quiz.id');
-        }
-      };
-  
+
+
+  const [quiz, setQuiz] = useState<Quiz>({
+    _id:  `${quizId}` ,
+    title: "",
+    description: "",
+    assignedto: "",
+    quizType: "Graded Quiz",
+    points: 12,
+    assignmentGroup: "Quizzes",
+    shuffleAnswers: "Yes",
+    timeLimit: 0,
+    multipleAttempts: "No",
+    showCorrectAnswers: "No",
+    accessCode: "",
+    oneQuestionAtATime: "Yes",
+    webcamRequired: "No",
+    lockQuestionsAfterAnswering: "No",
+    questions: [],
+    course: "RS101",
+    published: false
+  });
+
+
+  const handlePublishToggle = async () => {
+    const newStatus = await publishQuiz(quiz._id, quiz.published);
+    setQuiz({ ...quiz, published: newStatus });
+  };
+
+  const handlePreview = () => {
+    // Navigate to the Quiz Preview page
+    navigate(`/Kanbas/Courses/${course_id}/Quizzes/QuizPreview/${quiz_id}`);
+  };
+
+  const handleEdit = () => {
+
+    console.log(`CourseID: ${course_id}, quizid: ${quiz._id}`)
+    if (course_id && quiz?._id) {
+      navigate(`/Kanbas/Courses/${course_id}/Quizzes/EditQuizDetail/${quiz_id}`);
+    } else {
+      console.error('Missing course_id or quiz._id');
+    }
+  };
+
+
+  // For test
+  const handleEditNEW = () => {  
+      navigate(`/Kanbas/Courses/${course_id}/Quizzes/EditQuizDetail/${quizId}`);
+  };
+
+
+  useEffect(() => {
+    fetchQuiz();
+  }, []);
+
+  const fetchQuiz = async () => {
+    try {
+      console.log(`this is the quiz id${quiz._id}`)
+      const data = await findQuizById(quiz);
+      setQuiz(data);
+      console.log(`Here is the quiz we have from the cloud:${data}`)
+    } catch (error) {
+      console.error("Error fetching quizzes:", error);
+    }
+  };
+
   return (
     <div>
       <h1>Quiz Details</h1>
       <h1>{quiz.title}</h1>
-      <div>Quiz Type: {quiz.type}</div>
+      <div>Quiz Type: {quiz.quizType}</div>
       <div>Points: {quiz.points}</div>
       <div>Assignment Group: {quiz.assignmentGroup}</div>
       <div>Shuffle Answers: {quiz.shuffleAnswers}</div>
@@ -80,15 +108,20 @@ function QuizDetails() {
       <div>One Question at a Time: {quiz.oneQuestionAtATime}</div>
       <div>Webcam Required: {quiz.webcamRequired}</div>
       <div>Lock Questions After Answering: {quiz.lockQuestionsAfterAnswering}</div>
-      <div>Due Date: {new Date(quiz.dueDate).toLocaleString()}</div>
-      <div>Available Date: {new Date(quiz.availableDate).toLocaleString()}</div>
-      <div>Until Date: {new Date(quiz.untilDate).toLocaleString()}</div>
+
+      {quiz.dueDate && <div>Due Date: {new Date(quiz.dueDate).toLocaleString()}</div>}
+      {quiz.availableDate && 
+      <div>Available Date: {new Date(quiz.availableDate).toLocaleString()}</div>}
+      {quiz.untilDate && 
+      <div>Until Date: {new Date(quiz.untilDate).toLocaleString()}</div>}
       <button onClick={handlePublishToggle}>
-        {quiz.isPublished ? 'Unpublish' : 'Publish'}
+        {quiz.published ? 'Unpublish' : 'Publish'}
       </button>
       <button onClick={handlePreview}>Preview</button>
       <button onClick={handleEdit}>Edit</button>
-      
+      {/* For test */}
+      <button onClick={handleEditNEW}>Edit New</button>
+
     </div>
   );
 }

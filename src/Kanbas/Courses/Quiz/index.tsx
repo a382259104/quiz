@@ -1,6 +1,7 @@
 import React from "react";
 import { FaCheckCircle, FaEllipsisV, FaPlusCircle, FaRocket, FaBan } from "react-icons/fa";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { createQuiz } from "../../../Quizzes_And_Questions/client";
 
 import { format, isAfter, isBefore, isWithinInterval } from 'date-fns';
 //import { quizzes } from "../../Database";
@@ -63,15 +64,17 @@ function Quizzes() {
     const dueDate = new Date(quiz.dueDate);
 
     let availabilityText = 'Closed';
+
     if (isBefore(now, availableDate)) {
       availabilityText = `Not available until ${format(availableDate, 'MMM dd \'at\' p')}`;
     } else if (isWithinInterval(now, { start: availableDate, end: availableUntilDate })) {
       availabilityText = 'Available';
     }
 
+
     return {
       availabilityText,
-      dueText: `Due ${format(dueDate, 'MMM dd \'at\' p')}`,
+      dueText: `Due ${dueDate}`,
     };
   };
 
@@ -83,9 +86,36 @@ function Quizzes() {
   const handleAddQuiz = async () => {
     // Define the default properties for a new quiz
     const newQuiz = {
-      title: 'New Quiz',
-      Id: 123
+      _id: "",
+      title: "New Quiz",
+      description: "",
+      assignedto: "",
+      quizType: "Graded Quiz",
+      points: 0,
+      assignmentGroup: "Quizzes",
+      shuffleAnswers: "Yes",
+      timeLimit: 0,
+      multipleAttempts: "No",
+      showCorrectAnswers: "No",
+      accessCode: "",
+      oneQuestionAtATime: "Yes",
+      webcamRequired: "No",
+      lockQuestionsAfterAnswering: "No",
+      questions: [],
+      course: "RS101",
+      published: false
     };
+
+    try {
+      const quiz = await createQuiz(newQuiz);
+      navigate(`/Kanbas/Courses/${courseId}/Quizzes/QuizDetails/${quiz._id}`);
+    } catch (error) {
+      console.error("Error creating quiz:", error);
+    }
+
+
+
+
     //   try {
     //     // Dispatch an action to add the new quiz
     //     // Assuming addQuiz is an async thunk, wait for the result
@@ -97,7 +127,8 @@ function Quizzes() {
     // } catch (err) {
     //     console.error('Failed to create the quiz: ', err);
     // }
-    navigate(`/Kanbas/Courses/${courseId}/Quizzes/QuizDetails/${newQuiz.Id}`);
+
+
   }
 
 
@@ -141,12 +172,11 @@ function Quizzes() {
                     </Link>
                     <br />
                     Quiz Description
-                    {/* // Call getCurrentDateInfo for each quiz */}
-                    {/* const {aval, due} = getCurrentDateInfo(quiz); */}
-
-                <div>availabilityText</div>  Availability info
-                    <div>dueDate</div>
-                    <div>{quiz.points} pts | {quiz.numberOfQuestions} Questions</div>
+\
+                    <div> {getCurrentDateInfo(quiz).availabilityText}  |
+                     {getCurrentDateInfo(quiz).dueText} |
+                     {quiz.points} pts | {(quiz.questions).length} Questions
+                    </div>
 
 
 
