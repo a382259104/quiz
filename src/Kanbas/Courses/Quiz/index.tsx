@@ -6,18 +6,11 @@ import { createQuiz } from "../../../Quizzes_And_Questions/client";
 import { format, isAfter, isBefore, isWithinInterval } from 'date-fns';
 //import { quizzes } from "../../Database";
 import "./index.css"
-import { RxDragHandleDots2 } from "react-icons/rx";
+import { RxDragHandleDots2, RxMargin } from "react-icons/rx";
 import { GrNotes } from "react-icons/gr";
 import { GoPlus } from "react-icons/go";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  addQuizzes,
-  deleteQuizzes,
-  updateQuizzes,
-  setQuiz,
-  setQuizzes
-} from "./reducer";
 import { KanbasState } from "../../store";
 //import * as client from "./client";
 
@@ -26,6 +19,7 @@ import { LuFileText } from "react-icons/lu";
 import { GoTriangleDown, GoTriangleRight } from "react-icons/go";
 import { CiCircleCheck } from "react-icons/ci";
 import axios from "axios";
+import { BiBorderAll } from "react-icons/bi";
 
 const API_BASE = process.env.REACT_APP_API_BASE;
 
@@ -55,6 +49,10 @@ function Quizzes() {
     setQuizzes(quizzes.filter((quiz) => quiz._id !== quizId));
   }
 
+  const handleSetQuiz = async (quizId: String) => {
+    navigate(`QuizDetails/${quizId}`)
+  }
+
 
   // getCurrentDateInfo
   const getCurrentDateInfo = (quiz: any) => {
@@ -79,8 +77,8 @@ function Quizzes() {
   };
 
   //formats
-  const successformat = "text-success";
-  const secondaryFormat = "text-secondary";
+  const successformat = "me-2 text-success";
+  const secondaryFormat = "me-2 text-secondary";
 
 
   const handleAddQuiz = async () => {
@@ -163,123 +161,49 @@ function Quizzes() {
             {
               quizzes.map((quiz) => (
                 <li className="list-group-item" >
-                  <RxDragHandleDots2 className="me-2 align-center" />
-                  <FaRocket className={successformat} />
+                  <RxDragHandleDots2 className="me-2 align-center " />
 
-                  <div className="assignment-description">
-                    <Link to="#" className="no-margin">
-                      {quiz.title}
-                    </Link>
-                    <br />
-                    Quiz Description
-\
-                    <div> {getCurrentDateInfo(quiz).availabilityText}  |
-                     {getCurrentDateInfo(quiz).dueText} |
-                     {quiz.points} pts | {(quiz.questions).length} Questions
+                  {quiz.isPublished ? (
+                    <FaRocket className={successformat} />
+                  ) : (
+                    <FaRocket className={secondaryFormat} />
+                  )}
+
+
+                  <span>
+                    <div className="assignment-description">
+                      <Link to="#" className="no-margin">
+                        {quiz.title}
+                      </Link>
+                      <br />
+                      <div> {getCurrentDateInfo(quiz).availabilityText}  |
+                        {getCurrentDateInfo(quiz).dueText} |
+                        {quiz.points} pts | {(quiz.questions).length} Questions
+                      </div>
                     </div>
+                  </span>
 
-
-
-                  </div>
                   <span className="float-end">
                     {/* Change the logic to check if a quiz is published */}
                     {quiz.isPublished ? (
                       <FaCheckCircle className="text-success" />
                     ) : (
-                      <FaCheckCircle className="text-muted" />
+                      <FaBan className="text-muted" />
                     )}
                     <FaEllipsisV className="ms-2" />
-                    <span>
-                      <button onClick={() => dispatch(setQuiz(quiz))}>
-                        Edit
-                      </button>
-                      <button onClick={() => handleDeleteQuiz(quiz._id)}>
-                        Delete
-                      </button>
 
-                    </span>
+                    <button onClick={() => handleSetQuiz(quiz._id)} className="goodButton">
+                      Edit
+                    </button>
+                    <button onClick={() => handleDeleteQuiz(quiz._id)} className="goodButton">
+                      Delete
+                    </button>
+
                   </span>
 
                 </li>))
 
             }
-
-            {/* published */}
-            <li className="list-group-item" >
-              <RxDragHandleDots2 className="me-2 align-center" />
-              <FaRocket className={successformat} />
-
-              <div className="assignment-description">
-                <Link to="#" className="no-margin">
-                  Quiz Title
-                </Link>
-                {/* <span className="float-end">
-                                        {/* Change the logic to check if a quiz is published */}
-                {/* {quiz.isPublished ? (
-                                            <FaCheckCircle className="text-success" />
-                                        ) : (
-                                            <FaCheckCircle className="text-muted" />
-                                        )}
-                                        <FaEllipsisV className="ms-2" />
-                              </span>   */}
-
-                <br />
-                Quiz Description
-              </div>
-              <span className="float-end">
-                {/* <button onClick={() => dispatch(setQuiz(quiz))}>
-                                Edit
-                            </button>
-                            <button onClick={() => handleDeleteQuiz(quiz._id)}>
-                                Delete
-                            </button> */}
-                <FaCheckCircle className={successformat} /><FaEllipsisV className="ms-2" />
-
-                <button>Edit</button>
-                <button>Delete</button>
-
-              </span>
-            </li>
-
-            {/* unpublished */}
-
-            <li className="list-group-item" >
-              <RxDragHandleDots2 className="me-2 align-center" />
-              <FaRocket className={secondaryFormat} />
-
-              <div className="assignment-description">
-                <Link to="#" className="no-margin">
-                  Quiz Title
-                </Link>
-                <br />
-                Quiz description
-
-
-              </div>
-              <span className="float-end">
-
-                <FaBan className={secondaryFormat} />  <FaEllipsisV className="ms-2" />
-                <button>Edit</button>
-                <button>Delete</button>
-              </span>
-            </li>
-
-
-            {/* {quizzes.map((quiz: any) => (
-              <li className="list-group-item" >
-                <RxDragHandleDots2 className="me-2 align-center" />
-                <GrNotes className="me-2 completed" />
-
-                <div className="assignment-description">
-                  <Link to={`/Kanbas/Courses/${courseId}/Quizzes/${quiz._id}`} className="no-margin">
-                    {quiz.title}
-                  </Link>
-                  <br />
-                  hiii
-                </div>
-                <span className="float-end">
-                  <FaCheckCircle className="text-success" /><FaEllipsisV className="ms-2" /></span>
-              </li>))} */}
           </ul>
         </li >
       </ul >
