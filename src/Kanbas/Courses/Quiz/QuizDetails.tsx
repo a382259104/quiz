@@ -82,12 +82,12 @@ function QuizDetails() {
 
   const fetchQuiz = async () => {
     try {
-      console.log(`this is the quiz id:${quizId}`)
-      console.log(quiz)
       const data = await findQuizById(quizId);
+
+      console.log(`This is what we got from the server:${data}`)
       setQuiz((prevQuiz) => ({ ...prevQuiz, ...data }));
     } catch (error) {
-      console.error("Error fetching quizzes:", error);
+      console.error('Error fetching quizzes:', error);
     }
   };
 

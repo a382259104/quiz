@@ -71,7 +71,13 @@ function QuizDetailEdit() {
 // EVERYTHING BELOW IS THE CODE FROM BEFORE, I WILL START CHANGING EVERYTHING 
 
   const handleChange = (key: any, value: any) => {
+    if (key === 'untilDate') {
+    const date = value ? new Date(value) : null;
+    setQuiz({ ...quiz, [key]: date });
+  } else {
     setQuiz({ ...quiz, [key]: value });
+  }
+    
   };
 
 
@@ -210,19 +216,17 @@ function QuizDetailEdit() {
       </select>
 
 
-      <label>Due Date:</label>
-      <input
-        type="date"
-        value={quiz.untilDate ? quiz.untilDate.toISOString().slice(0, 10) : ''}
+      <label htmlFor='due-date'>Due Date:</label>
+      <input type="date" id='due-date' value={quiz.dueDate ? new Date(quiz.dueDate).toISOString().slice(0, 10) : ''}
         onChange={(e) => handleChange('dueDate', e.target.value)}
       />
 
       <label htmlFor="available-date">Available Date:</label>
-      <input type="date" id="available-date" value={quiz.availableDate ? quiz.availableDate.toISOString().slice(0, 10) : ''}
+      <input type="date" id="available-date" value={quiz.availableDate ? new Date(quiz.availableDate).toISOString().slice(0, 10) : ''}
        onChange={(e) => handleChange('availableDate', e.target.value)} />
 
       <label htmlFor="until-date">Until Date:</label>
-      <input type="date" id="until-date" value={quiz.untilDate ? quiz.untilDate.toISOString().slice(0, 10) : ''}
+      <input type="date" id="until-date" value={quiz.untilDate ? new Date(quiz.untilDate).toISOString().slice(0, 10) : ''}
        onChange={(e) => handleChange('untilDate', e.target.value)} />
 
 

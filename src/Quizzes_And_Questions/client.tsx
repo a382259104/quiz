@@ -62,8 +62,6 @@ export const findQuizByCourse = async (quiz: Quiz) => {
 
 export const findQuizById = async (id:any) => {
   try {
-
-    console.log(`Web client quiz::${id}`)
       const response = await axios.get(`${QUIZ_API}/findquiz/${id}`);
       return response.data;
   } catch (error) {

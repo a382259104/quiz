@@ -50,7 +50,8 @@ function Quizzes() {
   }
 
   const handleSetQuiz = async (quizId: String) => {
-    navigate(`QuizDetails/${quizId}`)
+    // navigate(`QuizDetails/${quizId}`)
+    navigate(`/Kanbas/Courses/${courseId}/Quizzes/QuizDetails/${quizId}`);
   }
 
 
