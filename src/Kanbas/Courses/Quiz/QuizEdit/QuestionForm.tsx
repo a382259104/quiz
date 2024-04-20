@@ -25,7 +25,7 @@ const QuestionForm = ({ question, onSave, onCancel }: { question: Question, onSa
         <div>
             <input type="text" name="title" value={localQuestion.title} onChange={handleChange} placeholder="Title" />
             <input type="number" name="points" value={localQuestion.points} onChange={handleChange} placeholder="Points" />
-            <textarea name="content" value={localQuestion.content} onChange={handleChange} placeholder="Content" />
+            <textarea name="question" value={localQuestion.question} onChange={handleChange} placeholder="Question" />
             {/* More fields based on question.type */}
             <button onClick={handleSave}>Save/Update Question</button>
             <button onClick={onCancel}>Cancel</button>

@@ -57,6 +57,10 @@ function QuizDetailEdit() {
   const { courseId, quizId } = useParams();
 
 
+  useEffect(() => {
+    fetchQuizzes();
+  }, [quizId]);
+
   const fetchQuizzes = async () => {
     try {
       const data = await findQuizById(quizId);
@@ -115,10 +119,7 @@ function QuizDetailEdit() {
     navigate(`/Kanbas/Courses/${courseId}/Quizzes`);
   };
 
-  useEffect(() => {
-    fetchQuizzes();
-  }, [quizId]);
-
+  
   
 
 

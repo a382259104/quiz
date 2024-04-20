@@ -5,69 +5,96 @@ import { useNavigate, useParams } from 'react-router';
 import MultipleChoiceEditor from './MultipleChoiceEditor';
 import TrueFalseEditor from './TrueFalseEditor';
 import FillInBlanksEditor from './FillInBlanksEditor';
-
-
+import { findQuestionsByQuiz, createQuestion, updateQuestion,deleteQuestion
+ } from '../../../../Quizzes_And_Questions/client';
 
 // Main Quiz Editor component
 function QuizQustionEdit() {
-    const [questions, setQuestions] = useState<Question[]>([]);
-    const [currentQuestionType, setCurrentQuestionType] = useState<QuestionType>('Multiple Choice');
+  const { courseId, quizId } = useParams();
+  const [questions, setQuestions] = useState<Question[]>([]);
 
-    const addNewQuestion = () => {
-        let newQuestion: Question;
-        switch (currentQuestionType) {
-            case 'Multiple Choice':
-                newQuestion = {
-                    id: Date.now(), title: '', points: 0, content: '', type: currentQuestionType,
-                    choices: [''], correctAnswerIndex: 0
-                } as MultipleChoiceQuestion;
-                break;
-            case 'True/False':
-                newQuestion = {
-                    id: Date.now(), title: '', points: 0, content: '', type: currentQuestionType,
-                    answer: true
-                } as TrueFalseQuestion;
-                break;
-            case 'Fill in Multiple Blanks':
-                newQuestion = {
-                    id: Date.now(), title: '', points: 0, content: '', type: currentQuestionType,
-                    blanks: [{ answer: [''] }]
-                } as FillInBlanksQuestion;
-                break;
-            default:
-                throw new Error('Unsupported question type');
-        }
-        setQuestions([...questions, newQuestion]);
-    };
+  useEffect(() => {
+    fetchQuestions();
+  }, [quizId]);
 
-    const saveQuestion = (question: Question) => {
-        const updatedQuestions = questions.map(q => q.id === question.id ? question : q);
-        setQuestions(updatedQuestions);
-        
-    };
+  const fetchQuestions = async () => {
+    const response = await findQuestionsByQuiz(quizId);
+    setQuestions(response);
+    console.log(questions)
+  };
 
-    const cancelEdit = () => {
-        
-    };
-   
+  const [currentQuestionType, setCurrentQuestionType] = useState<QuestionType>('MultipleChoice');
 
-    return (
-        <div>
-            <select value={currentQuestionType} onChange={e => setCurrentQuestionType(e.target.value as QuestionType)}>
-                <option value="Multiple Choice">Multiple Choice</option>
-                <option value="True/False">True/False</option>
-                <option value="Fill in Multiple Blanks">Fill in Multiple Blanks</option>
-            </select>
-            <button onClick={addNewQuestion}>Add New Question</button>
-            {questions.map((question) => (
-                <div key={question.id}>
-                    {question.type === 'Multiple Choice' && <MultipleChoiceEditor question={question as MultipleChoiceQuestion} onSave={saveQuestion as any} onCancel={cancelEdit} />}
-                    {question.type === 'True/False' && <TrueFalseEditor question={question as TrueFalseQuestion} onSave={saveQuestion as any} onCancel={cancelEdit} />}
-                    {question.type === 'Fill in Multiple Blanks' && <FillInBlanksEditor question={question as FillInBlanksQuestion} onSave={saveQuestion as any} onCancel={cancelEdit} />}
-                </div>
-            ))}
+  const addNewQuestion = () => {
+    let newQuestion: Question;
+    switch (currentQuestionType) {
+      case 'MultipleChoice':
+        newQuestion = {
+          _id: Date.now().toString(),
+          type: 'MultipleChoice',
+          title: 'New Question',
+          points: 0,
+          question: 'Fill me in',
+          choices: [''],
+          correctChoiceIndex: 0
+        } as MultipleChoiceQuestion;
+        break;
+      case 'TrueFalse':
+        newQuestion = {
+          _id: Date.now().toString(),
+          type: 'TrueFalse',
+          title: 'New True and False Question',
+          points: 0,
+          question: 'Fill me in',
+          correctAnswer: true
+        } as TrueFalseQuestion;
+        break;
+      case 'FillInTheBlanks':
+        newQuestion = {
+          _id: Date.now().toString(),
+          type: 'FillInTheBlanks',
+          title: 'New Fill-in the Blanks',
+          points: 0,
+          question: 'Fill me in',
+          blanks: [{ text: '', correctAnswer: '' }]
+        } as FillInBlanksQuestion;
+        break;
+      default:
+        throw new Error('Unsupported question type');
+    }
+    createQuestion(quizId,newQuestion)
+    setQuestions([...questions, newQuestion]);
+  };
+
+  const saveQuestion = (question: Question) => {
+    const updatedQuestions = questions.map(q => q._id === question._id ? question : q);
+    console.log(`This is the question id ${question._id}`)
+    updateQuestion(quizId, question)
+    setQuestions(updatedQuestions);
+  };
+
+  const cancelEdit = (question: Question) => {
+    console.log("Attempting to delete")
+    deleteQuestion(quizId,question)
+  };
+
+  return (
+    <div>
+      <select value={currentQuestionType} onChange={e => setCurrentQuestionType(e.target.value as QuestionType)}>
+        <option value="MultipleChoice">Multiple Choice</option>
+        <option value="TrueFalse">True/False</option>
+        <option value="FillInTheBlanks">Fill in Multiple Blanks</option>
+      </select>
+      <button onClick={addNewQuestion}>Add New Question</button>
+      {questions.map((question) => (
+        <div key={question._id}>
+          {question.type === 'MultipleChoice' && <MultipleChoiceEditor question={question as MultipleChoiceQuestion} onSave={saveQuestion} onCancel={cancelEdit} />}
+          {question.type === 'TrueFalse' && <TrueFalseEditor question={question as TrueFalseQuestion} onSave={saveQuestion} onCancel={cancelEdit} />}
+          {question.type === 'FillInTheBlanks' && <FillInBlanksEditor question={question as FillInBlanksQuestion} onSave={saveQuestion} onCancel={cancelEdit} />}
         </div>
-    );
-};
+      ))}
+    </div>
+  );
+}
 
 export default QuizQustionEdit;

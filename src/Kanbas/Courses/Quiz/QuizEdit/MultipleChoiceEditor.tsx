@@ -4,15 +4,15 @@ import { MultipleChoiceQuestion } from './type';
 interface Props {
     question: MultipleChoiceQuestion;
     onSave: (question: MultipleChoiceQuestion) => void;
-    onCancel: () => void;
+    onCancel: (question: MultipleChoiceQuestion) => void;
 }
 
 const MultipleChoiceEditor: React.FC<Props> = ({ question, onSave, onCancel }) => {
     const [title, setTitle] = useState(question.title);
     const [points, setPoints] = useState(question.points);
-    const [content, setContent] = useState(question.content);
+    const [content, setContent] = useState(question.question);
     const [choices, setChoices] = useState(question.choices);
-    const [correctAnswerIndex, setCorrectAnswerIndex] = useState(question.correctAnswerIndex);
+    const [correctAnswerIndex, setCorrectAnswerIndex] = useState(question.correctChoiceIndex);
 
     const handleChoiceChange = (index: number, value: string) => {
         const newChoices = choices.map((choice, i) => i === index ? value : choice);
@@ -32,7 +32,7 @@ const MultipleChoiceEditor: React.FC<Props> = ({ question, onSave, onCancel }) =
     };
 
     const save = () => {
-        onSave({ ...question, title, points, content, choices, correctAnswerIndex });
+        onSave({ ...question, title, points, question:content, choices, correctChoiceIndex:correctAnswerIndex });
     };
 
     return (
@@ -49,7 +49,8 @@ const MultipleChoiceEditor: React.FC<Props> = ({ question, onSave, onCancel }) =
             ))}
             <button onClick={handleAddChoice}>Add Choice</button>
             <button onClick={save}>Save/Update Question</button>
-            <button onClick={onCancel}>Cancel</button>
+            <button onClick={() => onCancel(question)}>Delete</button>
+
         </div>
     );
 };
