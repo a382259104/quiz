@@ -31,7 +31,7 @@ const TrueFalseEditor: React.FC<TrueFalseEditorProps> = ({ question, onSave, onC
                 </label>
             </div>
             <button onClick={save}>Save/Update Question</button>
-            <button onClick={()=> onCancel}>Delete</button>
+            <button onClick={() => onCancel(question)}>Delete</button>
         </div>
     );
 };

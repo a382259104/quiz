@@ -76,6 +76,7 @@ function QuizQustionEdit() {
   const cancelEdit = (question: Question) => {
     console.log("Attempting to delete")
     deleteQuestion(quizId,question)
+    setQuestions(questions.filter(q => q._id !== question._id));
   };
 
   return (

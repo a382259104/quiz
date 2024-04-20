@@ -77,7 +77,7 @@ const FillInBlanksEditor: React.FC<Props> = ({ question, onSave, onCancel }) => 
       ))}
       <button onClick={handleAddBlank}>Add Blank</button>
       <button onClick={save}>Save/Update Question</button>
-      <button onClick={()=>onCancel}>Delete</button>
+      <button onClick={() => onCancel(question)}>Delete</button>
     </div>
   );
 };
