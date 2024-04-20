@@ -100,10 +100,9 @@ export const deleteQuiz = async (quiz: Quiz) => {
     }
 };
 
-
-export const findAllQuestions = async (course:string) => {
+export const findQuestionsByQuiz = async (quizId:any) => {
     try {
-      const response = await axios.get(`${QUIZ_API}/${course}/questions`);
+      const response = await axios.get(`${QUIZ_API}/${quizId}/questions`);
       return response.data;
     } catch (error) {
       console.error("Error fetching questions:", error);
@@ -111,9 +110,9 @@ export const findAllQuestions = async (course:string) => {
     }
   };
   
-  export const findQuestionById = async (course:string,question: Question) => {
+  export const findQuestionById = async (quizId:any,question: Question) => {
     try {
-      const response = await axios.get(`${QUIZ_API}/${course}/questions/${question._id}`);
+      const response = await axios.get(`${QUIZ_API}/${quizId}questions/${question._id}`);
       return response.data;
     } catch (error) {
       console.error("Error fetching question by ID:", error);
@@ -121,9 +120,9 @@ export const findAllQuestions = async (course:string) => {
     }
   };
   
-  export const createQuestion = async (course:string,question: Question) => {
+  export const createQuestion = async (quizId:any,question: Question) => {
     try {
-      const response = await axios.post(`${QUIZ_API}/${course}/questions`, question);
+      const response = await axios.post(`${QUIZ_API}/${quizId}/questions`, question);
       return response.data;
     } catch (error) {
       console.error("Error creating question:", error);
@@ -131,9 +130,9 @@ export const findAllQuestions = async (course:string) => {
     }
   };
   
-  export const updateQuestion = async (course:string,question: Question) => {
+  export const updateQuestion = async (quizId:any,question: Question) => {
     try {
-      const response = await axios.put(`${QUIZ_API}/${course}/questions/${question._id}`, question);
+      const response = await axios.put(`${QUIZ_API}/${quizId}/questions/${question._id}`, question);
       return response.data;
     } catch (error) {
       console.error("Error updating question:", error);
@@ -141,9 +140,9 @@ export const findAllQuestions = async (course:string) => {
     }
   };
   
-  export const deleteQuestion = async (course:string,question: Question) => {
+  export const deleteQuestion = async (quizId:any,question: Question) => {
     try {
-      const response = await axios.delete(`${QUIZ_API}/${course}/questions/${question._id}`);
+      const response = await axios.delete(`${QUIZ_API}/${quizId}/questions/${question._id}`);
       return response.data;
     } catch (error) {
       console.error("Error deleting question:", error);

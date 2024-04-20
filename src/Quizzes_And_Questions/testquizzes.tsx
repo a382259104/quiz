@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Quiz, findQuizByCourse, createQuiz, updateQuiz, deleteQuiz } from "./client";
-import TestQuestions from "./testquestions";
 
 function TestQuizzes() {
     const [quizzes, setQuizzes] = useState<Quiz[]>([]);
@@ -181,7 +180,6 @@ function TestQuizzes() {
                     <button onClick={handleUpdateQuiz}>Update Quiz</button>
 
                     <button onClick={()=>setQuestions(!showQuestions)}>Edit Questions</button>
-                    {showQuestions && <TestQuestions course='RS101'/>}
                 </div>
             )}
 

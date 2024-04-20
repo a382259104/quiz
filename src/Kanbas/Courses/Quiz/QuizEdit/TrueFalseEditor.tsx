@@ -4,17 +4,17 @@ import { TrueFalseQuestion } from './type';
 interface TrueFalseEditorProps {
     question: TrueFalseQuestion;
     onSave: (question: TrueFalseQuestion) => void;
-    onCancel: () => void;
+    onCancel: (question: TrueFalseQuestion) => void;
 }
 
 const TrueFalseEditor: React.FC<TrueFalseEditorProps> = ({ question, onSave, onCancel }) => {
     const [title, setTitle] = useState(question.title);
     const [points, setPoints] = useState(question.points);
-    const [content, setContent] = useState(question.content);
-    const [answer, setAnswer] = useState(question.answer);
+    const [content, setContent] = useState<string>(question.question);
+    const [answer, setAnswer] = useState(question.correctAnswer);
 
     const save = () => {
-        onSave({ ...question, title, points, content, answer });
+        onSave({ ...question, title, points, question:content, correctAnswer:answer });
     };
 
     return (
@@ -31,7 +31,7 @@ const TrueFalseEditor: React.FC<TrueFalseEditorProps> = ({ question, onSave, onC
                 </label>
             </div>
             <button onClick={save}>Save/Update Question</button>
-            <button onClick={onCancel}>Cancel</button>
+            <button onClick={()=> onCancel}>Delete</button>
         </div>
     );
 };

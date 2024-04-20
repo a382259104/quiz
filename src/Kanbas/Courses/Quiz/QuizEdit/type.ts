@@ -1,25 +1,40 @@
 // types.ts
-export type QuestionType = 'Multiple Choice' | 'True/False' | 'Fill in Multiple Blanks';
+export type QuestionType = 'MultipleChoice' | 'TrueFalse' | 'FillInTheBlanks';
 
 export interface QuestionBase {
-    id: number;
-    type: QuestionType;
-    title: string;
-    points: number;
-    content: string;
+  _id: string;
+  type: QuestionType;
+  title: string;
+  points: number;
+  question: string;
+  choices?: string[];
+  correctChoiceIndex?: number;
+  correctAnswer?: boolean;
+  blanks?: Array<{ text: string, correctAnswer: string }>;
 }
 
 export interface MultipleChoiceQuestion extends QuestionBase {
-    choices: string[];
-    correctAnswerIndex: number;
+  type: 'MultipleChoice';
+  choices: string[];
+  correctChoiceIndex: number;
+  correctAnswer?: never;
+  blanks?: never;
 }
 
 export interface TrueFalseQuestion extends QuestionBase {
-    answer: boolean;
+  type: 'TrueFalse';
+  correctAnswer: boolean;
+  choices?: never;
+  correctChoiceIndex?: never;
+  blanks?: never;
 }
 
 export interface FillInBlanksQuestion extends QuestionBase {
-    blanks: Array<{answer: string[]}>;  // Array of answers for each blank, allowing multiple correct answers per blank
+  type: 'FillInTheBlanks';
+  blanks: Array<{ text: string, correctAnswer: string }>;
+  choices?: never;
+  correctChoiceIndex?: never;
+  correctAnswer?: never;
 }
 
 export type Question = MultipleChoiceQuestion | TrueFalseQuestion | FillInBlanksQuestion;
