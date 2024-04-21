@@ -140,8 +140,10 @@ function Quizzes() {
   const updateToggle = (quiz: any) => {
     if (quiz !== toggle.quiz) {
       setToggle({ quiz: quiz, toggle: true })
+    } else if (quiz === toggle.quiz) {
+      setToggle({ quiz: null, toggle: false })
     } else {
-      setToggle({ quiz: null, toggle: !toggle.toggle })
+      console.log('something wrong')
     }
   }
 
@@ -198,7 +200,20 @@ function Quizzes() {
                     </div>
                   </span>
 
+         
+
                   <span className="float-end">
+                  
+                  {(toggle.quiz === quiz) && toggle.toggle && <>
+                    <button onClick={() => navigateToDetails(quiz._id)} className="goodButton ">
+                      Edit
+                    </button>
+                    <button onClick={() => handleDeleteQuiz(quiz._id)} className="goodButton">
+                      Delete
+                    </button>
+                  </>
+                  }
+
                     {/* Change the logic to check if a quiz is published */}
                     {quiz.published ? (
                       <FaCheckCircle className="text-success"
@@ -207,21 +222,12 @@ function Quizzes() {
                       <>
                         <FaBan className="text-muted"
                           onClick={() => handlePublishToggle(quiz)} />
-
                       </>
 
                     )}
-                    <FaEllipsisV className="ms-2" onClick={updateToggle} />
-                    toggle : {toggle.toggle.toString()}
-                    {(toggle.quiz === quiz) && toggle.toggle && <>
-                      <button onClick={() => navigateToDetails(quiz._id)} className="goodButton">
-                        Edit
-                      </button>
-                      <button onClick={() => handleDeleteQuiz(quiz._id)} className="goodButton">
-                        Delete
-                      </button>
-                      </>
-                    }
+
+                    <FaEllipsisV className="ms-2" onClick={() => updateToggle(quiz)} />
+
 
                   </span>
 

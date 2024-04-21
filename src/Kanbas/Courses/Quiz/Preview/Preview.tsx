@@ -114,6 +114,7 @@ function Preview() {
                     <h1>Quiz Instructions</h1>
                     <hr className="preview-bold" />
                 </>}
+                
             {questions && questions.map((question, index) => (
                 <div className="preview-questions" key={index}>
                     {/* <CgPentagonRight className="icon" /> */}
