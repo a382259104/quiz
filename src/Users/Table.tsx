@@ -19,9 +19,10 @@ export default function UserTable() {
     }
   };
 
-  const deleteUser = async (user: User) => {
+  const deleteUser = async (username:string) => {
     try {
-      await client.deleteUser(user);
+      await client.deleteUser(username);
+      fetchUsers();
       setUsers(users.filter((u) => u._id !== user._id));
     } catch (err) {
       console.log(err);
@@ -83,7 +84,7 @@ export default function UserTable() {
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>
               <td>
-                <button onClick={() => deleteUser(user)}>
+                <button onClick={() => deleteUser(user.username)}>
                   <BsTrash3Fill />
                 </button>
               </td>
@@ -94,4 +95,3 @@ export default function UserTable() {
     </div>
   );
 }
-

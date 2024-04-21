@@ -29,8 +29,8 @@ export const profile = async () => {
     return response.data;
   };
 
-export const updateUser = async (user:any) => {
-    const response = await axios.put(`${USERS_API}/${user._id}`, user);
+export const updateUser = async (userProfile:any) => {
+    const response = await axios.put(`${USERS_API}/${userProfile.username}`, userProfile);
     return response.data;
 };
 
@@ -40,9 +40,9 @@ export const findAllUsers = async () => {
   };
   
   
-  export const deleteUser = async (user: any) => {
+  export const deleteUser = async (username:string) => {
     const response = await axios.delete(
-      `${USERS_API}/${user._id}`);
+      `${USERS_API}/${username}`);
     return response.data;
   };
   
