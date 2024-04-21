@@ -85,7 +85,6 @@ function QuizDetailEdit() {
   };
 
 
-  // Event handler for 'Save'
   const handleSave = async () => {
     console.log('Saving quiz:', quiz);
 
@@ -102,18 +101,25 @@ function QuizDetailEdit() {
     navigate(`/Kanbas/Courses/${courseId}/Quizzes/QuizDetails/${quizId}`);
   };
 
-  // Event handler for 'Save and Publish'
   const handleSaveAndPublish = async () => {
-    // Save and then publish the quiz
-    // await saveQuizDetails(quiz);
-    // await publishQuiz(quizId);
+    await handleSave();
     console.log('Saving and publishing quiz:', quiz);
+
+    if (quiz) {
+      try {
+        quiz.published = true
+        await updateQuiz(quiz);
+        fetchQuizzes();
+      } catch (error) {
+        console.error("Error updating quiz:", error);
+      }
+    }
+
 
     // Navigate to the Quiz List screen
     navigate(`/Kanbas/Courses/${courseId}/Quizzes`);
   };
 
-  // Event handler for 'Cancel'
   const handleCancel = () => {
     // Navigate back to the Quiz List screen without saving
     navigate(`/Kanbas/Courses/${courseId}/Quizzes`);

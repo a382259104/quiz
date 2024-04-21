@@ -1,23 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import QuizEdit from './QuizEdit';
-import { Quiz } from '../../../Quizzes_And_Questions/client';
-import { findQuizById } from '../../../Quizzes_And_Questions/client';
+import { Quiz, findQuizById, updateQuiz } from '../../../Quizzes_And_Questions/client';
 
-// Mock function to simulate publishing/unpublishing
-const publishQuiz = async (_id: any, published: any) => {
-  // Placeholder for actual publish/unpublish logic
-  return !published;
-};
-
-// const fetchQuizDetails = async (_id) => {
-//   // Placeholder for actual API call to fetch quiz details by _id
-//   return {
-//       _id,
-//       title: 'Q1 - HTML',
-//       // ... other quiz properties
-//   };
-// };  
 
 function QuizDetails() {
   const { courseId, quizId } = useParams();
@@ -51,9 +36,13 @@ function QuizDetails() {
 
 
   const handlePublishToggle = async () => {
-    const newStatus = await publishQuiz(quiz._id, quiz.published);
-    setQuiz({ ...quiz, published: newStatus });
-  };
+    const thisQuiz = await findQuizById(quiz._id);
+    const updatedQuiz = { ...thisQuiz, published: !thisQuiz.published };
+    console.log(`Our quiz is currently: ${updatedQuiz.published}`);
+    await updateQuiz(updatedQuiz);
+    setQuiz(updatedQuiz);
+};
+
 
   const handlePreview = () => {
     // Navigate to the Quiz Preview page

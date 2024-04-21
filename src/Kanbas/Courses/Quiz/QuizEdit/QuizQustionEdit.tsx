@@ -133,16 +133,16 @@ function QuizQustionEdit() {
   };
 
   const saveNpublishAllQuestions = async () => {
-    await Promise.all(localQuestions.map(question => updateQuestion(quizId, question)));
-    // Add update quiz publish here.
-    // Add update quiz publish here.
-    // Add update quiz publish here.
-    // Add update total points here.
-    // Add update total points here.
-    // Add update total points here.
-    setQuestions(localQuestions);
-    navigate(`/Kanbas/Courses/${courseId}/Quizzes`);
-    alert('All changes have been saved to the server. Quiz is published.');
+    await saveAllQuestions();
+    const quiz = await findQuizById(quizId);
+    if (quiz) {
+      try {
+        quiz.published = true;
+        await updateQuiz(quiz);
+      } catch (error) {
+        console.error("Error updating quiz:", error);
+      }
+    }
   };
 
   const editQuestion = (questionId: string) => {
