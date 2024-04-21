@@ -18,6 +18,7 @@ const publishQuiz = async (_id: any, published: any) => {
 //       // ... other quiz properties
 //   };
 // };  
+
 function QuizDetails() {
   const { courseId, quizId } = useParams();
   console.log(`CourseID: ${courseId}, quizid: ${quizId}`)

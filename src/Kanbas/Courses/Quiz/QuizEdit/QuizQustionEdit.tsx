@@ -6,7 +6,8 @@ import MultipleChoiceEditor from './MultipleChoiceEditor';
 import TrueFalseEditor from './TrueFalseEditor';
 import FillInBlanksEditor from './FillInBlanksEditor';
 import {
-  findQuestionsByQuiz, createQuestion, updateQuestion, deleteQuestion
+  findQuestionsByQuiz, createQuestion, updateQuestion, deleteQuestion,
+  findQuizById, updateQuiz
 } from '../../../../Quizzes_And_Questions/client';
 import { GrWaypoint } from 'react-icons/gr';
 
@@ -18,6 +19,8 @@ function QuizQustionEdit() {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [editQuestionId, setEditQuestionId] = useState<string | null>(null);
   const [localQuestions, setLocalQuestions] = useState<Question[]>([]); // Local state to manage edits
+  const [totalPoints, setTotalPoints] = useState(0);
+  const [questionsToDelete, setQuestionsToDelete] = useState<Question[]>([]);
 
 
   const fetchQuestions = async () => {
@@ -29,6 +32,7 @@ function QuizQustionEdit() {
 
   useEffect(() => {
     fetchQuestions();
+    calculateTotalScore();
   }, [quizId]);
 
   const [currentQuestionType, setCurrentQuestionType] = useState<QuestionType>('MultipleChoice');
@@ -42,7 +46,7 @@ function QuizQustionEdit() {
           type: 'MultipleChoice',
           title: 'New Question',
           points: 0,
-          question: '',
+          question: 'Fill me in',
           choices: [''],
           correctChoiceIndex: 0
         } as MultipleChoiceQuestion;
@@ -80,14 +84,9 @@ function QuizQustionEdit() {
 
   const saveQuestionLocally = (updatedQuestion: Question) => {
     const updatedLocalQuestions = localQuestions.map(q => q._id === updatedQuestion._id ? updatedQuestion : q);
-    //console.log(`This is the question id ${question._id}`)
-    // updateQuestion(quizId, question)
-    // setQuestions(updatedQuestions);
 
-    // setQuestions(updatedQuestions);
-    // setEditQuestionId(null);  // Exit edit mode
-    // await updateQuestion(quizId, question);
-
+    setTotalPoints(calculateTotalScore());
+    console.log(`Total points after local update:${totalPoints}`)
     setLocalQuestions(updatedLocalQuestions);
     setEditQuestionId(null); // Exit edit mode
   };
@@ -96,30 +95,39 @@ function QuizQustionEdit() {
     setEditQuestionId(null);  // Simply exit edit mode without reverting changes
   };
 
-  const setLocalType = (question : any) => {
-    
-  };
 
 
-
-  //calculate the surrent total score
   const calculateTotalScore = () => {
     let totalScore = 0;
-    questions.map((question) => {
-      totalScore = totalScore + question.points;
+    localQuestions.forEach((question) => {
+      totalScore += question.points;
     });
     console.log(`Total score is ${totalScore}`);
     return totalScore;
   };
 
 
+
   const saveAllQuestions = async () => {
+    // first updates all the questions
     await Promise.all(localQuestions.map(question => updateQuestion(quizId, question)));
-    // Add update total points here.
-    // Add update total points here.
-    // Add update total points here.
-    calculateTotalScore();
-    setQuestions(localQuestions); // Sync local edits back to the main state
+
+    // deletes all the questions too
+    await Promise.all(questionsToDelete.map(question => deleteQuestion(quizId, question)));
+
+    // updates the score
+    const totalScore = calculateTotalScore();
+    const quiz = await findQuizById(quizId);
+    if (quiz) {
+      try {
+        quiz.points = totalScore;
+        await updateQuiz(quiz);
+      } catch (error) {
+        console.error("Error updating quiz:", error);
+      }
+    }
+
+    setQuestions(localQuestions);
     navigate(`/Kanbas/Courses/${courseId}/Quizzes/QuizDetails/${quizId}`);
     alert('All changes have been saved to the server.');
   };
@@ -132,7 +140,7 @@ function QuizQustionEdit() {
     // Add update total points here.
     // Add update total points here.
     // Add update total points here.
-    setQuestions(localQuestions); // Sync local edits back to the main state
+    setQuestions(localQuestions);
     navigate(`/Kanbas/Courses/${courseId}/Quizzes`);
     alert('All changes have been saved to the server. Quiz is published.');
   };
@@ -141,11 +149,14 @@ function QuizQustionEdit() {
     setEditQuestionId(questionId);
   };
 
-  const deleteQuestion = (questionId: string) => {
-  };
-
   const deleteQuestionLocally = async (questionId: string) => {
     // Update local state to remove the question
+    // TODO: STORE AN ARRAY TO DELETE AND DELTE THAT ARRAY IF CANCELLED
+    const theNextOneInLine = localQuestions.find(question => question._id === questionId);
+    if (theNextOneInLine) {
+      setQuestionsToDelete(prev => [...prev, theNextOneInLine]);
+      console.log(`Added ${theNextOneInLine.question} to be deleted later`)
+    }
     setLocalQuestions(localQuestions.filter(question => question._id !== questionId));
   };
 
@@ -235,7 +246,7 @@ function QuizQustionEdit() {
                   </div>
 
                   <div className="question">
-                  
+
                     <p>{question.question}</p>
                   </div>
                   <div className="answers">
