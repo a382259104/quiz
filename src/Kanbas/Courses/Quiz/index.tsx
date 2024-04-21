@@ -103,7 +103,7 @@ function Quizzes() {
       points: 0,
       assignmentGroup: "Quizzes",
       shuffleAnswers: "Yes",
-      timeLimit: 0,
+      timeLimit: 20,
       multipleAttempts: "No",
       showCorrectAnswers: "No",
       accessCode: "",
