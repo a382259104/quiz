@@ -111,7 +111,7 @@ function Quizzes() {
       webcamRequired: "No",
       lockQuestionsAfterAnswering: "No",
       questions: [],
-      course: "RS101",
+      course: `${courseId}`,
       published: false
     };
 

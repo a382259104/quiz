@@ -8,6 +8,9 @@ import { useNavigate, useParams } from 'react-router';
 
 function QuizDetailEdit() {
 
+  const navigate = useNavigate();
+  const { courseId, quizId } = useParams();
+
   const [showQuestions, setQuestions] = useState(false);
 
   
@@ -28,7 +31,7 @@ function QuizDetailEdit() {
     webcamRequired: "No",
     lockQuestionsAfterAnswering: "No",
     questions: [],
-    course: "RS101",
+    course: `${courseId}`,
     published: false
   });
   
@@ -53,8 +56,6 @@ function QuizDetailEdit() {
   };
 
 
-  const navigate = useNavigate();
-  const { courseId, quizId } = useParams();
 
 
   useEffect(() => {
