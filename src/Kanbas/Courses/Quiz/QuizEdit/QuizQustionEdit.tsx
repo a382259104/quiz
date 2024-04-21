@@ -13,15 +13,17 @@ function QuizQustionEdit() {
   const { courseId, quizId } = useParams();
   const [questions, setQuestions] = useState<Question[]>([]);
 
-  useEffect(() => {
-    fetchQuestions();
-  }, [quizId]);
+  
 
   const fetchQuestions = async () => {
     const response = await findQuestionsByQuiz(quizId);
     setQuestions(response);
     console.log(questions)
   };
+
+  useEffect(() => {
+    fetchQuestions();
+  }, [quizId]);
 
   const [currentQuestionType, setCurrentQuestionType] = useState<QuestionType>('MultipleChoice');
 
