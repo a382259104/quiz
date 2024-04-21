@@ -1,0 +1,20 @@
+.preview-warning {
+    display: flex;
+    align-items: center;
+    background-color: #f7ece8;
+    color: #bc5134;
+    margin-bottom: 0;
+    padding: 1rem ;
+}
+
+.preview-warning p {
+    size: 1rem;
+    font-family: 'Roboto Mono', sans-serif;
+    margin-bottom:0;
+}
+
+.preview-icon {
+    color: red; 
+    size: 1rem; 
+    margin-right: 5px; 
+}

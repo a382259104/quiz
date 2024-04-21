@@ -13,6 +13,7 @@ import Quizzes from "./Quiz";
 import QuizDetails from "./Quiz/QuizDetails";
 import QuizEdit from "./Quiz/QuizEdit";
 import QuizPreview from "./Quizzes/preview";
+import Preview from "./Quiz/Preview/Preview";
 
 const API_BASE = process.env.REACT_APP_API_BASE;
 
@@ -62,7 +63,9 @@ function Courses() {
                             <Route path="Quizzes" element={<Quizzes />} />
                             <Route path="Quizzes/QuizDetails/:quizId" element={<QuizDetails />} />
                             <Route path="Quizzes/EditQuizDetail/:quizId/*" element={<QuizEdit />} />
+                            <Route path="Quizzes/QuizPreview/:quizId/*" element={<Preview />} />
                             <Route path="Quizzes" element={<QuizPreview/>} />
+                            {/* navigate(`/Kanbas/Courses/${courseId}/Quizzes/QuizPreview/${quizId}`); */}
                         </Routes>
                     </div>
                 </div>
