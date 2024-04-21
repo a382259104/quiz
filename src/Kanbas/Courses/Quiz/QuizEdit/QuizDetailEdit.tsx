@@ -231,10 +231,11 @@ function QuizDetailEdit() {
       <input type="date" id="until-date" value={quiz.untilDate ? new Date(quiz.untilDate).toISOString().slice(0, 10) : ''}
        onChange={(e) => handleChange('untilDate', e.target.value)} />
 
-
-      <button type="button" onClick={handleSave}>Save</button>
-      <button type="button" onClick={handleSaveAndPublish}>Save and Publish</button>
-      <button type="button" onClick={handleCancel}>Cancel</button>
+<br />
+<hr />
+      <button type="button" className='goodButton float-end' onClick={handleSave}>Save</button>
+      <button type="button" className='goodButton float-end' onClick={handleSaveAndPublish}>Save and Publish</button>
+      <button type="button" className='goodButton float-end' onClick={handleCancel}>Cancel</button>
 
     </form>
   );

@@ -44,13 +44,14 @@ const MultipleChoiceEditor: React.FC<Props> = ({ question, onSave, onCancel }) =
                 <div key={index}>
                     <textarea value={choice} onChange={e => handleChoiceChange(index, e.target.value)} placeholder="Choice Text" />
                     <input type="radio" name="correctAnswer" checked={index === correctAnswerIndex} onChange={() => setCorrectAnswerIndex(index)} />
-                    <button onClick={() => handleRemoveChoice(index)}>Remove</button>
+                    <button className="goodButton" onClick={() => handleRemoveChoice(index)}>Remove</button>
                 </div>
             ))}
-            <button onClick={handleAddChoice}>Add Choice</button>
-            <button onClick={save}>Save/Update Question</button>
-            <button onClick={() => onCancel(question)}>Delete</button>
-
+            <br />
+            <button className="goodButton" onClick={handleAddChoice}>Add Choice</button>
+            <button className="goodButton" onClick={save}>Save/Update Question</button>
+            <button className="goodButton" onClick={() => onCancel(question)}>Cancel</button>
+            <hr />
         </div>
     );
 };

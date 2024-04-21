@@ -14,7 +14,7 @@ const TrueFalseEditor: React.FC<TrueFalseEditorProps> = ({ question, onSave, onC
     const [answer, setAnswer] = useState(question.correctAnswer);
 
     const save = () => {
-        onSave({ ...question, title, points, question:content, correctAnswer:answer });
+        onSave({ ...question, title, points, question: content, correctAnswer: answer });
     };
 
     return (
@@ -30,8 +30,10 @@ const TrueFalseEditor: React.FC<TrueFalseEditorProps> = ({ question, onSave, onC
                     <input type="radio" checked={answer === false} onChange={() => setAnswer(false)} /> False
                 </label>
             </div>
-            <button onClick={save}>Save/Update Question</button>
-            <button onClick={() => onCancel(question)}>Delete</button>
+            <br />
+            <button className="goodButton" onClick={save}>Save/Update Question</button>
+            <button className="goodButton" onClick={() => onCancel(question)}>Delete</button>
+            <hr />
         </div>
     );
 };

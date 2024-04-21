@@ -72,12 +72,14 @@ const FillInBlanksEditor: React.FC<Props> = ({ question, onSave, onCancel }) => 
             onChange={(e) => handleCorrectAnswerChange(index, e.target.value)}
             placeholder="Correct Answer"
           />
-          <button onClick={() => handleRemoveBlank(index)}>Remove Blank</button>
+          <button className="goodButton" onClick={() => handleRemoveBlank(index)}>Remove Blank</button>
         </div>
       ))}
-      <button onClick={handleAddBlank}>Add Blank</button>
-      <button onClick={save}>Save/Update Question</button>
-      <button onClick={() => onCancel(question)}>Delete</button>
+      <br />
+      <button className="goodButton" onClick={handleAddBlank}>Add Blank</button>
+      <button className="goodButton" onClick={save}>Save/Update Question</button>
+      <button className="goodButton" onClick={() => onCancel(question)}>Delete</button>
+      <hr />
     </div>
   );
 };

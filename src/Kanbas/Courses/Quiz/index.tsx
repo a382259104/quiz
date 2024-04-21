@@ -1,7 +1,7 @@
 import React from "react";
 import { FaCheckCircle, FaEllipsisV, FaPlusCircle, FaRocket, FaBan } from "react-icons/fa";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { createQuiz,updateQuiz } from "../../../Quizzes_And_Questions/client";
+import { createQuiz, updateQuiz } from "../../../Quizzes_And_Questions/client";
 
 import { format, isAfter, isBefore, isWithinInterval } from 'date-fns';
 //import { quizzes } from "../../Database";
@@ -35,13 +35,13 @@ function Quizzes() {
     setQuizzes(response.data);
   };
 
-  const handlePublishToggle = async (quiz:any) => {
+  const handlePublishToggle = async (quiz: any) => {
     quiz.published = !quiz.published;
-    try{
+    try {
       await updateQuiz(quiz);
       findAllQuizzes()
       console.log(quizzes[0].published)
-    } catch(error) {
+    } catch (error) {
       console.log("cannot publish quiz")
     }
   };
@@ -121,10 +121,6 @@ function Quizzes() {
     } catch (error) {
       console.error("Error creating quiz:", error);
     }
-
-
-
-
     //   try {
     //     // Dispatch an action to add the new quiz
     //     // Assuming addQuiz is an async thunk, wait for the result
@@ -140,6 +136,14 @@ function Quizzes() {
 
   }
 
+  const [toggle, setToggle] = useState({ quiz: null, toggle: false });
+  const updateToggle = (quiz: any) => {
+    if (quiz !== toggle.quiz) {
+      setToggle({ quiz: quiz, toggle: true })
+    } else {
+      setToggle({ quiz: null, toggle: !toggle.toggle })
+    }
+  }
 
   return (
     <>
@@ -197,24 +201,27 @@ function Quizzes() {
                   <span className="float-end">
                     {/* Change the logic to check if a quiz is published */}
                     {quiz.published ? (
-                      <FaCheckCircle className="text-success" 
-                      onClick={()=>handlePublishToggle(quiz)}/>
+                      <FaCheckCircle className="text-success"
+                        onClick={() => handlePublishToggle(quiz)} />
                     ) : (
                       <>
                         <FaBan className="text-muted"
-                        onClick={()=>handlePublishToggle(quiz)} />
+                          onClick={() => handlePublishToggle(quiz)} />
 
                       </>
 
                     )}
-                    <FaEllipsisV className="ms-2" />
-
-                    <button onClick={() => navigateToDetails(quiz._id)} className="goodButton">
-                      Edit
-                    </button>
-                    <button onClick={() => handleDeleteQuiz(quiz._id)} className="goodButton">
-                      Delete
-                    </button>
+                    <FaEllipsisV className="ms-2" onClick={updateToggle} />
+                    toggle : {toggle.toggle.toString()}
+                    {(toggle.quiz === quiz) && toggle.toggle && <>
+                      <button onClick={() => navigateToDetails(quiz._id)} className="goodButton">
+                        Edit
+                      </button>
+                      <button onClick={() => handleDeleteQuiz(quiz._id)} className="goodButton">
+                        Delete
+                      </button>
+                      </>
+                    }
 
                   </span>
 

@@ -3,8 +3,6 @@
 import { useParams } from "react-router";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import "./preview.css";
-import MultipleChoice from "./MultipleChoice";
-import TrueFalse from "./TrueFalse";
 import { useEffect, useState } from "react";
 import { Quiz, findQuizById, findQuestionsByQuiz, Question } from "../../../../Quizzes_And_Questions/client";
 

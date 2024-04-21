@@ -40,6 +40,7 @@ function ModuleList() {
             dispatch(addModule(module));
         });
     };
+    
     const handleDeleteModule = (moduleId: string) => {
         client.deleteModule(moduleId).then((status) => {
             dispatch(deleteModule(moduleId));
