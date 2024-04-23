@@ -136,7 +136,7 @@ export const updateQuestion = async (quizId: any, question: Question) => {
 
     return response.data;
   } catch (error:any) {
-    if (error.response && error.response.status === 404 && error.response.data.message === "Question not found.") {
+    if (error.response && error.response.status === 404 && error.response.data.message === "Question not found") {
       try {
         const newQuestionResponse = await createQuestion(quizId, question); 
         return newQuestionResponse.data; 
